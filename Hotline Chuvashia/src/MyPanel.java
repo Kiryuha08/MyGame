@@ -6,14 +6,18 @@ import java.awt.event.MouseListener;
 public class MyPanel extends JPanel implements MouseListener {
 
     Hero hero;
-    public MyPanel(Hero hero){
+    Enemy enemy;
+    public MyPanel(Hero hero, Enemy enemy){
         this.hero = hero;
+        this.enemy = enemy;
     }
     @Override
     protected void paintComponent(Graphics g) {
 
         hero.posUpdate();
         hero.paint(g);
+        enemy.posUpdate();
+        enemy.paint(g);
 
     }
 

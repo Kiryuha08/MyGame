@@ -7,6 +7,7 @@ public class Hero {
     int vy = 1;
     int xd;
     int yd;
+    int WiHgh = 50;
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
 
@@ -15,31 +16,36 @@ public class Hero {
         this.x = x;
         this.y = y;
     }
+
+
+
     void posUpdate(){
 
         //sx = x - xd;
         //sy = y - yd;
 
 
-        if (this.x > this.xd){
+        if (this.x+WiHgh/2 > this.xd){
             this.x -= vx;
-        } else if (this.x < this.xd){
+            System.out.println(xd);
+            System.out.println(x);
+        } else if (this.x+WiHgh/2 < this.xd){
             this.x += vx;
+            System.out.println(xd);
+            System.out.println(x);
         }
 
-        if (this.x == this.xd) {
-            if (this.y > this.yd) {
-                //System.out.println(xd);
-                //System.out.println(x);
+
+        if (this.x+WiHgh/2 == this.xd) {
+            if (this.y+WiHgh/2 > this.yd) {
                 this.y -= vy;
-            } else if(this.y < this.yd) {
-                //System.out.println(xd);
-                //System.out.println(x);
+                System.out.println(yd);
+                System.out.println(y);
+            } else if(this.y+WiHgh/2 < this.yd) {
                 this.y += vy;
-
+                System.out.println(yd);
+                System.out.println(y);
             }
-
-
         }
 
 
@@ -47,7 +53,7 @@ public class Hero {
     }
 
     void paint(Graphics g) {
-        g.fillRect(this.x, this.y, 50, 50);
+        g.fillRect(this.x, this.y-WiHgh/2, WiHgh, WiHgh);
     }
 }
 
