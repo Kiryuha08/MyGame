@@ -14,11 +14,14 @@ public class MyPanel extends JPanel implements MouseListener {
     @Override
     protected void paintComponent(Graphics g) {
 
+        if (enemy.isCollided(hero)){
+            enemy.IsDead = 1;
+        }
+
         hero.posUpdate();
         hero.paint(g);
         enemy.posUpdate();
         enemy.paint(g);
-
     }
 
     @Override

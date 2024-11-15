@@ -47,9 +47,6 @@ public class Hero {
                 System.out.println(y);
             }
         }
-
-
-
     }
 
     void paint(Graphics g) {
