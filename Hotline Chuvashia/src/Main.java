@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        Hero hero = new Hero(375,350);
+        Hero hero = new Hero(0,0);
         Enemy enemy = new Enemy(375, 200);
 
 

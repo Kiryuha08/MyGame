@@ -27,24 +27,24 @@ public class Hero {
 
         if (this.x+WiHgh/2 > this.xd){
             this.x -= vx;
-            System.out.println(xd);
-            System.out.println(x);
+            //System.out.println(xd);
+            //System.out.println(x);
         } else if (this.x+WiHgh/2 < this.xd){
             this.x += vx;
-            System.out.println(xd);
-            System.out.println(x);
+            //System.out.println(xd);
+            //System.out.println(x);
         }
 
 
         if (this.x+WiHgh/2 == this.xd) {
             if (this.y+WiHgh/2 > this.yd) {
                 this.y -= vy;
-                System.out.println(yd);
-                System.out.println(y);
+                //System.out.println(yd);
+                //System.out.println(y);
             } else if(this.y+WiHgh/2 < this.yd) {
                 this.y += vy;
-                System.out.println(yd);
-                System.out.println(y);
+                //System.out.println(yd);
+                //System.out.println(y);
             }
         }
     }

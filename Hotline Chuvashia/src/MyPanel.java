@@ -26,13 +26,14 @@ public class MyPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        hero.xd = e.getX();
-        hero.yd = e.getY();
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        hero.xd = e.getX();
+        hero.yd = e.getY();
+        //System.out.println(e.getX() + " " + e.getY());
     }
 
     @Override
