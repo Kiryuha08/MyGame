@@ -7,9 +7,11 @@ public class MyPanel extends JPanel implements MouseListener {
 
     Hero hero;
     Enemy enemy;
-    public MyPanel(Hero hero, Enemy enemy){
+    Bullet bullet;
+    public MyPanel(Hero hero, Enemy enemy, Bullet bullet){
         this.hero = hero;
         this.enemy = enemy;
+        this.bullet = bullet;
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -18,10 +20,17 @@ public class MyPanel extends JPanel implements MouseListener {
             enemy.IsDead = 1;
         }
 
+        if (enemy.IsShooting(hero)){
+            bullet.IsShooted = 1;
+            enemy.HeShooting = 1;
+        }
+
         hero.posUpdate();
         hero.paint(g);
         enemy.posUpdate();
         enemy.paint(g);
+        bullet.posUpdate();
+        bullet.paint(g);
     }
 
     @Override

@@ -4,11 +4,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        Hero hero = new Hero(0,0);
+        Hero hero = new Hero(375,350);
         Enemy enemy = new Enemy(375, 200);
+        Bullet bullet = new Bullet((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
 
 
-        MyPanel panel = new MyPanel(hero, enemy);
+
+        MyPanel panel = new MyPanel(hero, enemy, bullet);
 
         // Создаем окно
         JFrame frame = new JFrame();
@@ -27,7 +29,7 @@ public class Main {
         while (true) {
             frame.repaint();
             try {
-                TimeUnit.MILLISECONDS.sleep(0);
+                TimeUnit.MILLISECONDS.sleep(5);
             }
             catch (InterruptedException e) {
             }
