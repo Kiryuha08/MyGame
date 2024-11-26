@@ -8,10 +8,12 @@ public class MyPanel extends JPanel implements MouseListener {
     Hero hero;
     Enemy enemy;
     Bullet bullet;
-    public MyPanel(Hero hero, Enemy enemy, Bullet bullet){
+    Walls wall;
+    public MyPanel(Hero hero, Enemy enemy, Bullet bullet, Walls wall){
         this.hero = hero;
         this.enemy = enemy;
         this.bullet = bullet;
+        this.wall = wall;
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -25,17 +27,22 @@ public class MyPanel extends JPanel implements MouseListener {
             enemy.HeShooting = 1;
         }
 
-        hero.posUpdate();
+        if (bullet.HeroDied(hero)){
+            hero.YouDead = 1;
+        }
+        //System.out.println(hero.YouDead);
+
+        hero.posUpdate(wall);
         hero.paint(g);
         enemy.posUpdate();
         enemy.paint(g);
-        bullet.posUpdate();
+        bullet.posUpdate(enemy);
         bullet.paint(g);
+        wall.paint(g);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
@@ -47,16 +54,13 @@ public class MyPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 }

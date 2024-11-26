@@ -1,8 +1,8 @@
 import java.awt.*;
 
 public class Bullet {
-    int x;
-    int y;
+    double x;
+    double y;
     int w = 10;
     int v = 5;
     int IsShooted = 0;
@@ -15,14 +15,29 @@ public class Bullet {
     void paint(Graphics g) {
         g.setColor(new Color(0xFFA900));
         if(IsShooted == 1) {
-            g.fillRect(this.x, this.y, this.w, this.w);
+            g.fillRect((int) this.x,(int) this.y, this.w, this.w);
         }
     }
 
-    void posUpdate() {
+    void posUpdate(Enemy enemy) {
         if (IsShooted == 1) {
-            this.x += v;
+            this.x += Math.signum(enemy.v)*v;
+        }
+        else {
+            this.x = enemy.x;
         }
     }
 
+    boolean HeroDied(Hero hero) {
+        if ((((int)this.x <= hero.x + hero.WiHgh) && ((int)this.x+this.w >= hero.x)) && (((int)this.y <= hero.y + hero.WiHgh/2) && ((int)this.y + this.w >= hero.y - hero.WiHgh/2))){
+        //if ((((int)this.x + this.w >= hero.x || (int)this.x <= hero.x + hero.WiHgh) && (int)this.y + this.w >= hero.y)
+        //    ||
+        //    (((int)this.x + this.w >= hero.x || (int)this.x <= hero.x + hero.WiHgh) && (int)this.y <= hero.vy + hero.WiHgh)) {
+            return true;
+        }
+
+        else{
+            return false;
+            }
+    }
 }
