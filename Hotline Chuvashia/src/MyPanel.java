@@ -27,14 +27,14 @@ public class MyPanel extends JPanel implements MouseListener {
             enemy.HeShooting = 1;
         }
 
-        if (bullet.HeroDied(hero)){
+        if (bullet.HeroDied(hero, enemy)){
             hero.YouDead = 1;
         }
         //System.out.println(hero.YouDead);
 
         hero.posUpdate(wall);
         hero.paint(g);
-        enemy.posUpdate();
+        enemy.posUpdate(hero);
         enemy.paint(g);
         bullet.posUpdate(enemy);
         bullet.paint(g);

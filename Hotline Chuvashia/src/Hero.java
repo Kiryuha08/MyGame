@@ -34,7 +34,7 @@ public class Hero {
                 //System.out.println(xd);
                 //System.out.println(x);
             }
-        else if()
+        //else if()
 
 
             if (this.x+WiHgh/2 == this.xd) {

@@ -20,24 +20,26 @@ public class Bullet {
     }
 
     void posUpdate(Enemy enemy) {
-        if (IsShooted == 1) {
-            this.x += Math.signum(enemy.v)*v;
-        }
-        else {
-            this.x = enemy.x;
+        if (enemy.IsDead != 1) {
+            if (IsShooted == 1) {
+                this.x += Math.signum(enemy.v) * v;
+            } else {
+                this.x = enemy.x + enemy.WH;
+            }
         }
     }
 
-    boolean HeroDied(Hero hero) {
-        if ((((int)this.x <= hero.x + hero.WiHgh) && ((int)this.x+this.w >= hero.x)) && (((int)this.y <= hero.y + hero.WiHgh/2) && ((int)this.y + this.w >= hero.y - hero.WiHgh/2))){
-        //if ((((int)this.x + this.w >= hero.x || (int)this.x <= hero.x + hero.WiHgh) && (int)this.y + this.w >= hero.y)
-        //    ||
-        //    (((int)this.x + this.w >= hero.x || (int)this.x <= hero.x + hero.WiHgh) && (int)this.y <= hero.vy + hero.WiHgh)) {
-            return true;
-        }
-
-        else{
-            return false;
+    boolean HeroDied(Hero hero, Enemy enemy) {
+        if (enemy.IsDead != 1) {
+            if ((((int) this.x <= hero.x + hero.WiHgh) && ((int) this.x + this.w >= hero.x)) && (((int) this.y <= hero.y + hero.WiHgh / 2) && ((int) this.y + this.w >= hero.y - hero.WiHgh / 2))) {
+                //if ((((int)this.x + this.w >= hero.x || (int)this.x <= hero.x + hero.WiHgh) && (int)this.y + this.w >= hero.y)
+                //    ||
+                //    (((int)this.x + this.w >= hero.x || (int)this.x <= hero.x + hero.WiHgh) && (int)this.y <= hero.vy + hero.WiHgh)) {
+                return true;
+            } else {
+                return false;
             }
+        }
+        return false;
     }
 }

@@ -16,16 +16,18 @@ public class Enemy {
     }
 
     boolean IsShooting(Hero hero){
-        if (Math.signum(this.v) == Math.signum(hero.x - this.x)){
-            if(((int)this.x + this.ShootDist <= hero.x + hero.WiHgh || (int)this.x + this.WH + this.ShootDist >= hero.x) && ((int)this.y <= hero.y + hero.WiHgh/2 && (int)this.y + this.WH >= hero.y - hero.WiHgh/2)){
-                return true;
+        if (this.IsDead != 1) {
+            if (Math.signum(this.v) == Math.signum(hero.x - this.x)) {
+                if (((int) this.x + this.ShootDist <= hero.x + hero.WiHgh || (int) this.x + this.WH + this.ShootDist >= hero.x) && ((int) this.y <= hero.y + hero.WiHgh / 2 && (int) this.y + this.WH >= hero.y - hero.WiHgh / 2)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    void posUpdate(){
-        if (HeShooting == 0){
+    void posUpdate(Hero hero){
+        if (HeShooting == 0 || hero.YouDead == 1){
             if (this.x < 0 || this.x > 800-this.WH){
                 this.v *= -1;
             }
@@ -36,14 +38,16 @@ public class Enemy {
 
 
     boolean isCollided(Hero hero) {
-        if ((((int)this.x <= hero.x + hero.WiHgh) && ((int)this.x+this.WH >= hero.x)) && (((int)this.y <= hero.y + hero.WiHgh/2) && ((int)this.y + this.WH >= hero.y - hero.WiHgh/2))){
+        if (hero.YouDead != 1) {
+            if ((((int) this.x <= hero.x + hero.WiHgh) && ((int) this.x + this.WH >= hero.x)) && (((int) this.y <= hero.y + hero.WiHgh / 2) && ((int) this.y + this.WH >= hero.y - hero.WiHgh / 2))) {
                 //|| (((int)this.x == hero.x + hero.WiHgh || (int)this.x+this.WH == hero.x) && (int)this.y-this.WH == hero.y)){
-            return true;
-        }
+                return true;
+            } else {
+                return false;
+            }
 
-        else{
-            return false;
         }
+        return false;
     }
 
 
