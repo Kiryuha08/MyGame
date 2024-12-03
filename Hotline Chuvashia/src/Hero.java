@@ -9,6 +9,8 @@ public class Hero {
     int yd;
     int WiHgh = 50;
     int YouDead;
+    int NextToWall = 0;
+
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
 
@@ -18,26 +20,32 @@ public class Hero {
         this.y = y;
     }
 
-
+    void wallInteraction(Walls wall){
+        if((this.x <= wall.x+ wall.wWidx && this.x >= wall.x) && (this.y <= wall.y+ wall.wLeny && this.y + this.WiHgh >= wall.y)){
+            this.NextToWall = 1;
+            System.out.println(this.NextToWall);
+        }
+        System.out.println(this.NextToWall);
+    }
 
     void posUpdate(Walls wall){
 
         //sx = x - xd;
         //sy = y - yd;
-        if(this.x >= wall.x)
-            if (this.x+WiHgh/2 > this.xd){
-                this.x -= vx;
-                //System.out.println(xd);
-                //System.out.println(x);
-            } else if (this.x+WiHgh/2 < this.xd){
-                this.x += vx;
-                //System.out.println(xd);
-                //System.out.println(x);
-            }
+
+        if (this.x+WiHgh/2 > this.xd){
+            this.x -= vx;
+            //System.out.println(xd);
+            //System.out.println(x);
+        } else if (this.x+WiHgh < this.xd){
+            this.x += vx;
+            //System.out.println(xd);
+            //System.out.println(x);
+        }
         //else if()
 
 
-            if (this.x+WiHgh/2 == this.xd) {
+            if (this.x+WiHgh/2 <= this.xd) {
                 if (this.y+WiHgh/2 > this.yd) {
                     this.y -= vy;
                     //System.out.println(yd);

@@ -4,10 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        Hero hero = new Hero(375,350);
+        Hero hero = new Hero(400,250);
         Enemy enemy = new Enemy(375, 200);
         Bullet bullet = new Bullet((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
-        Walls wall = new Walls(100, 500, 50, 600);
+        Walls wall = new Walls(400, 300, 50, 50);
 
 
 
