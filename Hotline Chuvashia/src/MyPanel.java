@@ -39,6 +39,7 @@ public class MyPanel extends JPanel implements MouseListener {
         bullet.posUpdate(enemy);
         bullet.paint(g);
         wall.paint(g);
+        hero.wallInteraction(wall);
     }
 
     @Override

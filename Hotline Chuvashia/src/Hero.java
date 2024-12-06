@@ -21,9 +21,20 @@ public class Hero {
     }
 
     void wallInteraction(Walls wall){
-        if((this.x <= wall.x+ wall.wWidx && this.x >= wall.x) && (this.y <= wall.y+ wall.wLeny && this.y + this.WiHgh >= wall.y)){
+        if((this.x <= wall.x+ wall.wWidx && this.x >= wall.x) && (this.y -
+                this.WiHgh/2<= wall.y+ wall.wLeny && this.y + this.WiHgh/2 >= wall.y)){
             this.NextToWall = 1;
-            System.out.println(this.NextToWall);
+        }
+
+
+
+        else if((this.x + this.WiHgh >= wall.x && this.x <= wall.x) && (this.y -
+                this.WiHgh/2 <= wall.y+ wall.wLeny && this.y + this.WiHgh/2 >= wall.y)){
+            this.NextToWall = 3;
+        }
+
+        else{
+            this.NextToWall = 0;
         }
         System.out.println(this.NextToWall);
     }
@@ -33,11 +44,11 @@ public class Hero {
         //sx = x - xd;
         //sy = y - yd;
 
-        if (this.x+WiHgh/2 > this.xd){
+        if (this.x+WiHgh/2 > this.xd && this.NextToWall != 1){
             this.x -= vx;
             //System.out.println(xd);
             //System.out.println(x);
-        } else if (this.x+WiHgh < this.xd){
+        } else if (this.x+WiHgh/2 < this.xd && this.NextToWall != 3){
             this.x += vx;
             //System.out.println(xd);
             //System.out.println(x);
@@ -45,7 +56,7 @@ public class Hero {
         //else if()
 
 
-            if (this.x+WiHgh/2 <= this.xd) {
+            if (this.x+WiHgh/2 == this.xd) {
                 if (this.y+WiHgh/2 > this.yd) {
                     this.y -= vy;
                     //System.out.println(yd);

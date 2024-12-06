@@ -7,7 +7,7 @@ public class Main {
         Hero hero = new Hero(400,250);
         Enemy enemy = new Enemy(375, 200);
         Bullet bullet = new Bullet((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
-        Walls wall = new Walls(400, 300, 50, 50);
+        Walls wall = new Walls(400, 300, 250, 150);
 
 
 
