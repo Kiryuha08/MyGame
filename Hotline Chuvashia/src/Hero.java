@@ -21,16 +21,24 @@ public class Hero {
     }
 
     void wallInteraction(Walls wall){
-        if((this.x <= wall.x+ wall.wWidx && this.x >= wall.x) && (this.y -
+        if((this.x == wall.x + wall.wWidx) && (this.y -
                 this.WiHgh/2<= wall.y+ wall.wLeny && this.y + this.WiHgh/2 >= wall.y)){
-            this.NextToWall = 1;
+            this.NextToWall = 1;        //столкновение с левой стенкой
         }
 
+        else if((this.y - this.WiHgh/2 == wall.y + wall.wLeny) && (this.x +
+                this.WiHgh >= wall.x && this.x <= wall.x + wall.wWidx)){
+            this.NextToWall = 2;        // столкновение со "дном"
+        }
 
-
-        else if((this.x + this.WiHgh >= wall.x && this.x <= wall.x) && (this.y -
+        else if((this.x + this.WiHgh == wall.x) && (this.y -
                 this.WiHgh/2 <= wall.y+ wall.wLeny && this.y + this.WiHgh/2 >= wall.y)){
-            this.NextToWall = 3;
+            this.NextToWall = 3;        //столкновение с правой стенкой
+        }
+
+        else if((this.y + this.WiHgh/2== wall.y) && (this.x +
+                this.WiHgh >= wall.x && this.x <= wall.x + wall.wWidx)){
+            this.NextToWall = 4;        // столкновение с "верхом"
         }
 
         else{
@@ -56,12 +64,12 @@ public class Hero {
         //else if()
 
 
-            if (this.x+WiHgh/2 == this.xd) {
-                if (this.y+WiHgh/2 > this.yd) {
+            if (this.x+WiHgh/2 == this.xd || this.NextToWall % 2 == 1) {
+                if (this.y+WiHgh/2 > this.yd && this.NextToWall != 2) {
                     this.y -= vy;
                     //System.out.println(yd);
                     //System.out.println(y);
-                } else if(this.y+WiHgh/2 < this.yd) {
+                } else if(this.y+WiHgh/2 < this.yd && this.NextToWall != 4) {
                     this.y += vy;
                     //System.out.println(yd);
                     //System.out.println(y);
