@@ -52,30 +52,27 @@ public class Hero {
         //sx = x - xd;
         //sy = y - yd;
 
-        if (this.x+WiHgh/2 > this.xd && this.NextToWall != 1){
-            this.x -= vx;
-            //System.out.println(xd);
-            //System.out.println(x);
-        } else if (this.x+WiHgh/2 < this.xd && this.NextToWall != 3){
-            this.x += vx;
-            //System.out.println(xd);
-            //System.out.println(x);
-        }
-        //else if()
 
-
-            if (this.x+WiHgh/2 == this.xd || this.NextToWall % 2 == 1) {
-                if (this.y+WiHgh/2 > this.yd && this.NextToWall != 2) {
-                    this.y -= vy;
-                    //System.out.println(yd);
-                    //System.out.println(y);
-                } else if(this.y+WiHgh/2 < this.yd && this.NextToWall != 4) {
-                    this.y += vy;
-                    //System.out.println(yd);
-                    //System.out.println(y);
-                }
-
-        }
+           if (this.x + WiHgh / 2 > this.xd && this.NextToWall != 1) {
+               this.x -= vx;
+               //System.out.println(xd);
+               //System.out.println(x);
+           } else if (this.x + WiHgh / 2 < this.xd && this.NextToWall != 3) {
+               this.x += vx;
+               //System.out.println(xd);
+               //System.out.println(x);
+           }
+           if (this.x + WiHgh / 2 == this.xd || this.NextToWall % 2 == 1) {
+               if (this.y + WiHgh / 2 > this.yd && this.NextToWall != 2) {
+                   this.y -= vy;
+                   //System.out.println(yd);
+                   //System.out.println(y);
+               } else if (this.y + WiHgh / 2 < this.yd && this.NextToWall != 4) {
+                   this.y += vy;
+                   //System.out.println(yd);
+                   //System.out.println(y);
+               }
+           }
     }
 
     void paint(Graphics g) {

@@ -42,6 +42,7 @@ public class MyPanel extends JPanel implements MouseListener {
         bullet.paint(g);
         wall.paint(g);
         hero.wallInteraction(wall);
+        vizorEn.PosUpdate(enemy);
         vizorEn.paint(g);
     }
 
