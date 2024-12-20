@@ -1,16 +1,16 @@
 import java.awt.*;
 
-public class Vizor {
+public class ShootVizor {
     double x;
     double y;
-    double x1 = 250;
+    double x1 = 150;
     double y1 = 100;
-    double x2 = 250;
+    double x2 = 150;
     double y2 = 100;
     int enStatus = 1;
 
 
-    public Vizor(int x, int y) {
+    public ShootVizor(int x, int y) {
         this.x = x;
         this.y = y;
     }

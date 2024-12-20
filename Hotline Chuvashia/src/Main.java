@@ -9,10 +9,11 @@ public class Main {
         Bullet bullet = new Bullet((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
         Walls wall = new Walls(400, 300, 150, 150);
         Vizor vizorEn = new Vizor((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
+        ShootVizor shootvizorEn = new ShootVizor((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
 
 
 
-        MyPanel panel = new MyPanel(hero, enemy, bullet, wall, vizorEn);
+        MyPanel panel = new MyPanel(hero, enemy, bullet, wall, vizorEn, shootvizorEn);
 
         // Создаем окно
         JFrame frame = new JFrame();
