@@ -11,16 +11,20 @@ public class MyPanel extends JPanel implements MouseListener {
     Walls wall;
     Vizor vizorEn;
     ShootVizor shootvizorEn;
-    public MyPanel(Hero hero, Enemy enemy, Bullet bullet, Walls wall, Vizor vizorEn, ShootVizor shootvizorEn){
+    BG bg;
+    public MyPanel(Hero hero, Enemy enemy, Bullet bullet, Walls wall, Vizor vizorEn, ShootVizor shootvizorEn, BG bg){
         this.hero = hero;
         this.enemy = enemy;
         this.bullet = bullet;
         this.wall = wall;
         this.vizorEn = vizorEn;
         this.shootvizorEn = shootvizorEn;
+        this.bg = bg;
     }
     @Override
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        bg.paintBG(g);
 
         if (enemy.isCollided(hero)){
             enemy.IsDead = 1;
@@ -48,6 +52,7 @@ public class MyPanel extends JPanel implements MouseListener {
         vizorEn.paint(g);
         shootvizorEn.PosUpdate(enemy);
         shootvizorEn.paint(g);
+
     }
 
     @Override

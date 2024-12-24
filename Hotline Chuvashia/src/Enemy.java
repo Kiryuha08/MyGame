@@ -36,7 +36,6 @@ public class Enemy {
         this.HeShooting = 0;
     }
 
-
     boolean isCollided(Hero hero) {
         if (hero.YouDead != 1) {
             if ((((int) this.x <= hero.x + hero.WiHgh) && ((int) this.x + this.WH >= hero.x)) && (((int) this.y <= hero.y + hero.WiHgh / 2) && ((int) this.y + this.WH >= hero.y - hero.WiHgh / 2))) {
@@ -49,10 +48,6 @@ public class Enemy {
         }
         return false;
     }
-
-
-
-
 
     void paint(Graphics g) {
         g.setColor(Color.RED);

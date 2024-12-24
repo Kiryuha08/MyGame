@@ -24,7 +24,7 @@ public class Bullet {
             if (IsShooted == 1) {
                 this.x += Math.signum(enemy.v) * v;
             } else {
-                this.x = enemy.x + enemy.WH;
+                this.x = enemy.x + enemy.WH/2;
             }
         }
     }

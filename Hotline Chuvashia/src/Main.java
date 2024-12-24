@@ -1,19 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BG bg = new BG();
         Hero hero = new Hero(400,50);
         Enemy enemy = new Enemy(375, 200);
-        Bullet bullet = new Bullet((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
+        Bullet bullet = new Bullet((int)enemy.x + enemy.WH/2, (int)enemy.y + enemy.WH/2);
         Walls wall = new Walls(400, 300, 150, 150);
         Vizor vizorEn = new Vizor((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
         ShootVizor shootvizorEn = new ShootVizor((int)enemy.x + 2*enemy.WH, (int)enemy.y + enemy.WH/2);
 
 
 
-        MyPanel panel = new MyPanel(hero, enemy, bullet, wall, vizorEn, shootvizorEn);
+        MyPanel panel = new MyPanel(hero, enemy, bullet, wall, vizorEn, shootvizorEn, bg);
 
         // Создаем окно
         JFrame frame = new JFrame();
