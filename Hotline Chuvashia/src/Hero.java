@@ -1,4 +1,8 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Hero {
     int x;
@@ -10,15 +14,17 @@ public class Hero {
     int WiHgh = 50;
     int YouDead;
     int NextToWall = 0;
-
+    BufferedImage BGImage;
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
 
 
-    public Hero(int x, int y){
+    public Hero(int x, int y) throws IOException {
+        this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
         this.x = x;
         this.y = y;
     }
+
 
     void wallInteraction(Walls wall){
         if((this.x == wall.x + wall.wWidx) && (this.y -
@@ -77,6 +83,7 @@ public class Hero {
 
     void paint(Graphics g) {
         if (YouDead != 1){
+            g.drawImage(BGImage, this.x, this.y-WiHgh/2, null);
             g.fillRect(this.x, this.y-WiHgh/2, WiHgh, WiHgh);
         }
     }
