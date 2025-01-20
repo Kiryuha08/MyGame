@@ -6,6 +6,8 @@ public class Bullet {
     int w = 10;
     int v = 5;
     int IsShooted = 0;
+    long curTime;
+    long prevTime = 0;
 
     public Bullet(int x, int y){
         this.x = x;
@@ -22,11 +24,13 @@ public class Bullet {
     void posUpdate(Enemy enemy) {
         if (enemy.IsDead != 1) {
             if (IsShooted == 1) {
-                this.x += Math.signum(enemy.v) * v;
+                this.x += Math.signum(enemy.vx) * v * ((this.curTime - this.prevTime)/4);
+                this.prevTime = this.curTime;
             } else {
                 this.x = enemy.x + enemy.WH/2;
             }
         }
+
     }
 
     boolean HeroDied(Hero hero, Enemy enemy) {

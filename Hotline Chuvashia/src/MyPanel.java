@@ -2,21 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class MyPanel extends JPanel implements MouseListener {
+public class MyPanel extends JPanel implements MouseListener, MouseMotionListener {
 
     Hero hero;
     Enemy enemy;
     Bullet bullet;
-    Walls wall;
+    Room room;
     Vizor vizorEn;
     ShootVizor shootvizorEn;
     BG bg;
-    public MyPanel(Hero hero, Enemy enemy, Bullet bullet, Walls wall, Vizor vizorEn, ShootVizor shootvizorEn, BG bg){
+    public MyPanel(Hero hero, Enemy enemy, Bullet bullet, Room room, Vizor vizorEn, ShootVizor shootvizorEn, BG bg){
+        // TODO: Всё должно быть в классе Room ( кроме Hero )
         this.hero = hero;
         this.enemy = enemy;
         this.bullet = bullet;
-        this.wall = wall;
+        this.room = room;
         this.vizorEn = vizorEn;
         this.shootvizorEn = shootvizorEn;
         this.bg = bg;
@@ -40,14 +42,16 @@ public class MyPanel extends JPanel implements MouseListener {
         }
         //System.out.println(hero.YouDead);
 
-        hero.posUpdate(wall);
+        hero.posUpdate(room);
         hero.paint(g);
         enemy.posUpdate(hero);
         enemy.paint(g);
         bullet.posUpdate(enemy);
         bullet.paint(g);
-        wall.paint(g);
-        hero.wallInteraction(wall);
+        for (Walls wall : room.walls) {
+            wall.paint(g);
+        }
+        //hero.wallInteraction(room.walls.get(0));
         vizorEn.PosUpdate(enemy);
         vizorEn.paint(g);
         shootvizorEn.PosUpdate(enemy);
@@ -76,5 +80,17 @@ public class MyPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        hero.xd = e.getX();
+        hero.yd = e.getY();
+        //System.out.println(e.getX() + " " + e.getY());
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }

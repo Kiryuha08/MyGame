@@ -7,7 +7,7 @@ public class BG {
     BufferedImage BGImage;
 
     public BG() throws IOException {
-        this.BGImage = ImageIO.read(new File("data\\dark-rock-wall-seamless-texture-free-105.jpg"));
+        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\dark-rock-wall-seamless-texture-free-105.png"));
     }
 
 
