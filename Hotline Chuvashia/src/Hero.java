@@ -1,4 +1,8 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Hero {
     double x;
@@ -12,12 +16,13 @@ public class Hero {
     int NextToWall = 0;
     long curTime;
     long prevTime = 0;
-
+    BufferedImage BGImage;
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
 
 
-    public Hero(int x, int y){
+    public Hero(int x, int y) throws IOException {
+        this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
         this.x = x;
         this.y = y;
     }
@@ -64,10 +69,12 @@ public class Hero {
 
         //todo: Переделать расчет
 
-        if (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)this.y) == 1){
+        if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y - WiHgh / 2)) == 1)
+            || (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y + WiHgh / 2)) == 1)){
             this.x = x1;
         }
-        if (room.pointCheck((int)this.x, (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1){
+        if ((room.pointCheck((int)(this.x - WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+        || (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)){
             this.y = y1;
         }
 
@@ -97,6 +104,7 @@ public class Hero {
 
     void paint(Graphics g) {
         if (YouDead != 1){
+            g.drawImage(BGImage, (int)this.x-150, (int)this.y-WiHgh/2-130, null);
             g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
         }
     }
