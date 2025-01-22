@@ -19,7 +19,7 @@ public class Room {
     }
 
     void UpdateBanPoints(){
-        // TODO: расчет недоступных точек (забаненые = 1, доступные = 0)
+        // расчет недоступных точек (забаненые = 1, доступные = 0)
         for (Walls wall : this.walls){
             for (int i = wall.x1; i < wall.x2 + 1; i++) {
                 for (int j = wall.y1; j < wall.y2 + 1; j++){

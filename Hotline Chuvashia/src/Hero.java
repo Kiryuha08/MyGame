@@ -67,16 +67,29 @@ public class Hero {
         x1 = this.x + Math.signum(this.xd - this.x) * vx * ((this.curTime - this.prevTime)/4);
         y1 = this.y + Math.signum(this.yd - this.y) * vy * ((this.curTime - this.prevTime)/4);
 
-        //todo: Переделать расчет
+        // Переделать расчет
 
-        if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y - WiHgh / 2)) == 1)
-            || (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y + WiHgh / 2)) == 1)){
+        if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+            && (room.pointCheck((int)(x1 - Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+            && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 - Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+        )
+        {
             this.x = x1;
-        }
-        if ((room.pointCheck((int)(this.x - WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
-        || (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)){
             this.y = y1;
+        } else {
+            if ((room.pointCheck((int)(this.x - WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+                && (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+            ) {
+                this.y = y1;
+            }
+            if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y - WiHgh/2)) == 1)
+                && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y + WiHgh/2)) == 1)
+            ) {
+                this.x = x1;
+            }
+
         }
+
 
 
 /*        if (this.x + WiHgh / 2 > this.xd && this.NextToWall != 1) {

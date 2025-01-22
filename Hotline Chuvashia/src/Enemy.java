@@ -12,8 +12,10 @@ public class Enemy {
     int HeShooting = 0;
     long curTime;
     long prevTime = 0;
-    int moving;
+    int patrol;
     int rotating;
+    int pursuit;
+    int returning;
 
     double X1 = 700;
     double Y1 = this.y;
@@ -41,7 +43,7 @@ public class Enemy {
         }
         return false;
     }
-
+    //todo:
     void posUpdate(Hero hero){
 
 
