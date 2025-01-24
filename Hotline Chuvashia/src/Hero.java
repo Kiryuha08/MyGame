@@ -17,6 +17,7 @@ public class Hero {
     long curTime;
     long prevTime = 0;
     BufferedImage BGImage;
+    double degrees;
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
 
@@ -25,6 +26,21 @@ public class Hero {
         this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
         this.x = x;
         this.y = y;
+    }
+
+    public static BufferedImage rotateImage(BufferedImage imageToRotate, double degrees) {
+        int widthOfImage = imageToRotate.getWidth();
+        int heightOfImage = imageToRotate.getHeight();
+        int typeOfImage = imageToRotate.getType();
+
+        BufferedImage newImageFromBuffer = new BufferedImage(widthOfImage, heightOfImage, typeOfImage);
+
+        Graphics2D graphics2D = newImageFromBuffer.createGraphics();
+
+        graphics2D.rotate(degrees, widthOfImage / 2, heightOfImage / 2);
+        graphics2D.drawImage(imageToRotate, null, 0, 0);
+
+        return newImageFromBuffer;
     }
 
     void wallInteraction(Walls wall){
@@ -81,13 +97,15 @@ public class Hero {
                 && (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
             ) {
                 this.y = y1;
+                this.degrees = 90 - 90 * Math.signum(this.yd - this.y);
             }
             if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y - WiHgh/2)) == 1)
                 && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y + WiHgh/2)) == 1)
             ) {
                 this.x = x1;
+                this.degrees = 90 - 90 * Math.signum(this.xd - this.x);
             }
-
+            this.degrees = Math.atan(-1*(vy * 30 / 400));
         }
 
 
