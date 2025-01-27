@@ -7,20 +7,18 @@ import java.awt.event.MouseMotionListener;
 public class MyPanel extends JPanel implements MouseListener, MouseMotionListener {
 
     Hero hero;
-    Enemy enemy;
-    Bullet bullet;
+    //Bullet bullet;
     Room room;
-    Vizor vizorEn;
-    ShootVizor shootvizorEn;
+    //Vizor vizorEn;
+    //ShootVizor shootvizorEn;
     BG bg;
-    public MyPanel(Hero hero, Enemy enemy, Bullet bullet, Room room, Vizor vizorEn, ShootVizor shootvizorEn, BG bg){
+    public MyPanel(Hero hero, Room room, BG bg){
         // TODO: Всё должно быть в классе Room ( кроме Hero )
         this.hero = hero;
-        this.enemy = enemy;
-        this.bullet = bullet;
+       // this.bullet = bullet;
         this.room = room;
-        this.vizorEn = vizorEn;
-        this.shootvizorEn = shootvizorEn;
+        //this.vizorEn = vizorEn;
+        //this.shootvizorEn = shootvizorEn;
         this.bg = bg;
     }
     @Override

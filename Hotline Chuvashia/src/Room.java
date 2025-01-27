@@ -4,11 +4,13 @@ public class Room {
     public ArrayList<Walls> walls;
 
     public ArrayList<Enemy> Enemies;
+
     //public ArrayList<Door> Doors;
     public int[][] BanPoints;
 
     public Room () {
         this.walls = new ArrayList<Walls>();
+        this.Enemies = new ArrayList<Enemy>();
         this.BanPoints = new int[800][600]; // Создаём матрицу из всех точек комнаты
     }
 
@@ -16,6 +18,10 @@ public class Room {
         // добавление стены
         this.walls.add(new Walls(x1,y1,x2,y2));
         this.UpdateBanPoints();
+    }
+
+    void AddEnemy(int x, int y){
+        this.Enemies.add(new Enemy(x,y));
     }
 
     void UpdateBanPoints(){
