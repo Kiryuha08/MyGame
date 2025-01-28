@@ -71,6 +71,14 @@ public class Hero {
         //System.out.println(this.NextToWall);
     }
 
+    void paint(Graphics g) {
+        if (YouDead != 1){
+            g.drawImage(rotateImage(this.BGImage, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
+            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
+        }
+    }
+
+
     void posUpdate(Room room){
 
         this.curTime = System.currentTimeMillis();
@@ -79,33 +87,36 @@ public class Hero {
 
         }
 
+
         double x1, y1;
         x1 = this.x + Math.signum(this.xd - this.x) * vx * ((this.curTime - this.prevTime)/4);
         y1 = this.y + Math.signum(this.yd - this.y) * vy * ((this.curTime - this.prevTime)/4);
 
-        // Переделать расчет
+
+        //this.degrees = 45 * Math.signum(this.yd - this.y);
+
 
         if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
             && (room.pointCheck((int)(x1 - Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
-            && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 - Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
-        )
-        {
+            && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 - Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)) {
+
             this.x = x1;
             this.y = y1;
-        } else {
+        }
+        else {
             if ((room.pointCheck((int)(this.x - WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
                 && (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
             ) {
                 this.y = y1;
-                this.degrees = 90 - 90 * Math.signum(this.yd - this.y);
+                //this.degrees = 45 * Math.signum(this.yd - this.y);
             }
             if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y - WiHgh/2)) == 1)
                 && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y + WiHgh/2)) == 1)
             ) {
                 this.x = x1;
-                this.degrees = 90 - 90 * Math.signum(this.xd - this.x);
+                //this.degrees = 45 * Math.signum(this.xd - this.x);
             }
-            this.degrees = Math.atan(-1*(vy * 30 / 400));
+
         }
 
 
@@ -133,10 +144,4 @@ public class Hero {
         this.prevTime = this.curTime;
     }
 
-    void paint(Graphics g) {
-        if (YouDead != 1){
-            g.drawImage(BGImage, (int)this.x-150, (int)this.y-WiHgh/2-130, null);
-            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
-        }
-    }
 }

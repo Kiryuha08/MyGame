@@ -15,6 +15,7 @@ public class Main {
         rooms.AddWalls(100, 100, 150, 250);
 
         rooms.AddEnemy(375, 200);
+        rooms.AddEnemy(375, 100);
         //Enemy enemy = new Enemy(375, 200);
         //Bullet bullet = new Bullet((int)enemy.x + enemy.WH/2, (int)enemy.y + enemy.WH/2);
         //Walls wall = new Walls(400, 300, 150, 150);

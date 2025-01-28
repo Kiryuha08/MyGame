@@ -15,7 +15,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
     public MyPanel(Hero hero, Room room, BG bg){
         // TODO: Всё должно быть в классе Room ( кроме Hero )
         this.hero = hero;
-       // this.bullet = bullet;
+        //this.bullet = bullet;
         this.room = room;
         //this.vizorEn = vizorEn;
         //this.shootvizorEn = shootvizorEn;
@@ -26,7 +26,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
         super.paintComponent(g);
         bg.paintBG(g);
 
-        if (enemy.isCollided(hero)){
+ /*       if (enemy.isCollided(hero)){
             enemy.IsDead = 1;
         }
 
@@ -38,23 +38,27 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
         if (bullet.HeroDied(hero, enemy)){
             hero.YouDead = 1;
         }
-        //System.out.println(hero.YouDead);
+        //System.out.println(hero.YouDead);*/
 
         hero.posUpdate(room);
         hero.paint(g);
-        enemy.posUpdate(hero);
-        enemy.paint(g);
-        bullet.posUpdate(enemy);
-        bullet.paint(g);
+        //enemy.posUpdate(hero);
+        //enemy.paint(g);
+        //bullet.posUpdate(enemy);
+        //bullet.paint(g);
         for (Walls wall : room.walls) {
             wall.paint(g);
         }
-        //hero.wallInteraction(room.walls.get(0));
-        vizorEn.PosUpdate(enemy);
-        vizorEn.paint(g);
-        shootvizorEn.PosUpdate(enemy);
-        shootvizorEn.paint(g);
 
+        for (Enemy enemy : room.Enemies){
+            enemy.paint(g);
+            //enemy.posUpdate;
+        }
+        //hero.wallInteraction(room.walls.get(0));
+        //vizorEn.PosUpdate(enemy);
+        //vizorEn.paint(g);
+        //shootvizorEn.PosUpdate(enemy);
+        //shootvizorEn.paint(g);
     }
 
     @Override
