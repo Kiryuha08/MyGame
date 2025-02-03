@@ -1,5 +1,6 @@
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Enemy {
     double x;
@@ -27,10 +28,16 @@ public class Enemy {
     int Delta2 = -5;
     int Angle = this.Angle1;
 
+    public Vizor vizor;
+    public Room room;
 
-    public Enemy(int x, int y){
+
+    public Enemy(int x, int y, Room room){
         this.x = x;
         this.y = y;
+        this.room = room;
+        this.vizor = new Vizor(x,y);
+
     }
 
     boolean IsShooting(Hero hero){
@@ -94,6 +101,8 @@ public class Enemy {
         System.out.println(this.Angle + "        " + this.vx);
         this.HeShooting = 0;
         this.prevTime = this.curTime;
+
+        this.vizor.PosUpdate(this);
     }
 
     //void heroRotate(){
@@ -123,11 +132,14 @@ public class Enemy {
         return false;
     }
 
+
+
     void paint(Graphics g) {
-        g.setColor(Color.RED);
         //System.out.println(IsDead);
+        vizor.paint(g);
+        g.setColor(Color.RED);
         if (this.IsDead != 1) {
-            g.fillRect((int) this.x, (int) this.y, WH, WH);
+            g.fillRect((int) this.x - WH/2, (int) this.y - WH/2, WH, WH);
         }
         //else{
         //    this.IsDead = 0;

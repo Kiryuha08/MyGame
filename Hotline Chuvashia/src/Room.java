@@ -21,7 +21,7 @@ public class Room {
     }
 
     void AddEnemy(int x, int y){
-        this.Enemies.add(new Enemy(x,y));
+        this.Enemies.add(new Enemy(x,y, this));
     }
 
     void UpdateBanPoints(){

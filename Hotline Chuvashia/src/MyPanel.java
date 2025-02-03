@@ -40,8 +40,6 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
         }
         //System.out.println(hero.YouDead);*/
 
-        hero.posUpdate(room);
-        hero.paint(g);
         //enemy.posUpdate(hero);
         //enemy.paint(g);
         //bullet.posUpdate(enemy);
@@ -51,9 +49,11 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
         }
 
         for (Enemy enemy : room.Enemies){
+            enemy.posUpdate(this.hero);
             enemy.paint(g);
-            //enemy.posUpdate;
         }
+        hero.posUpdate(room);
+        hero.paint(g);
         //hero.wallInteraction(room.walls.get(0));
         //vizorEn.PosUpdate(enemy);
         //vizorEn.paint(g);
