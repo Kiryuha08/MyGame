@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Hero {
     double x;
@@ -24,6 +25,7 @@ public class Hero {
 
     public Hero(int x, int y) throws IOException {
         this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
+
         this.x = x;
         this.y = y;
     }
@@ -120,6 +122,12 @@ public class Hero {
 
         }
 
+        for (int i = (int)this.x - this.WiHgh/2; i <= (int)this.x + this.WiHgh/2; i ++){
+            for (int j = (int)this.y - this.WiHgh/2; j <= (int)this.y + this.WiHgh/2; j ++){
+                if (i >= 0 && i < 800 && j >=0 && j < 600)
+                    room.RoomPoints[i][j] = 2;
+            }
+        }
 
 
 /*        if (this.x + WiHgh / 2 > this.xd && this.NextToWall != 1) {

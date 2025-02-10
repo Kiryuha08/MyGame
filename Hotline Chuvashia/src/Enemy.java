@@ -136,7 +136,7 @@ public class Enemy {
 
     void paint(Graphics g) {
         //System.out.println(IsDead);
-        vizor.paint(g);
+        vizor.paint(g, this);
         g.setColor(Color.RED);
         if (this.IsDead != 1) {
             g.fillRect((int) this.x - WH/2, (int) this.y - WH/2, WH, WH);
