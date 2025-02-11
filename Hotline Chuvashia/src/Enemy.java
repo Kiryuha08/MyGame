@@ -13,10 +13,11 @@ public class Enemy {
     int HeShooting = 0;
     long curTime;
     long prevTime = 0;
-    int patrol;
-    int rotating;
-    int pursuit;
-    int returning;
+    int enemystate;
+    // 1 - patrol;
+    // 2 - rotating;
+    // 3 - pursuit;
+    // 4 - returning;
 
     double X1 = 700;
     double Y1 = this.y;
@@ -78,8 +79,20 @@ public class Enemy {
         //    if
         //        this.x += v * ((this.curTime - this.prevTime)/4);
 
+        if (vizor.ISeeYou != 1){
+            if (((int)this.x <= this.X2 && this.y <= this.Y2) && ((int)this.x >= this.X1 && this.y >= this.Y1) && (this.Angle > this.Angle1)){
+                this.enemystate = 2;
+            }
+            else{
 
-        if (this.x <= this.X2 && this.y <= this.Y2){
+            }
+
+        }
+
+
+
+
+        if ((int)this.x <= this.X2 && this.y <= this.Y2){
             if (this.Angle > this.Angle1) {
                 this.Angle += this.Delta2;
             }
@@ -87,7 +100,7 @@ public class Enemy {
                 this.vx = -1 * this.vx;
             }
         }
-        if (this.x >= this.X1 && this.y >= this.Y1){
+        if ((int)this.x >= this.X1 && this.y >= this.Y1){
             if (this.Angle < this.Angle2) {
                 this.Angle += this.Delta1;
             }
@@ -98,7 +111,7 @@ public class Enemy {
         this.x += vx * ((this.curTime - this.prevTime)/4);
 
 
-        System.out.println(this.Angle + "        " + this.vx);
+        System.out.println(this.Angle + "        " + this.vx + "        " + this.x + "        " + this.y);
         this.HeShooting = 0;
         this.prevTime = this.curTime;
 
