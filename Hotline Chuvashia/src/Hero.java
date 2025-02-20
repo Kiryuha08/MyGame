@@ -46,7 +46,6 @@ public class Hero {
     }
 
     void wallInteraction(Walls wall){
-        // TODO: заменить проверку доступности точки на room.BanPoints
         /*if(((int)this.x == wall.x + wall.wWidx) && ((int)this.y -
                 this.WiHgh/2<= wall.y+ wall.wLeny && (int)this.y + this.WiHgh/2 >= wall.y)){
             this.NextToWall = 1;        //столкновение с левой стенкой
@@ -76,8 +75,8 @@ public class Hero {
     void paint(Graphics g) {
         g.setColor(Color.gray);
         if (YouDead != 1){
-            g.drawImage(rotateImage(this.BGImage, this.degrees), (int)this.x-150, (int)this.y-WiHgh-130, null);
-            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh, WiHgh, WiHgh);
+            g.drawImage(rotateImage(this.BGImage, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
+            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
         }
     }
 

@@ -12,7 +12,7 @@ public class Main {
         Hero hero = new Hero(400,50);
         Room rooms = new Room();
         rooms.AddWalls(400, 300, 550, 450);
-        rooms.AddWalls(100, 100, 150, 250);
+        //rooms.AddWalls(100, 100, 150, 250);
 
         rooms.AddEnemy(375, 200);
         //rooms.AddEnemy(375, 100);

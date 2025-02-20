@@ -22,11 +22,10 @@ public class Enemy {
     double X1 = 700;
     double Y1 = this.y;
     int Angle1 = 0;
-    int Delta1 = 5;
+    int Delta = 5;
     double X2 = 100;
     double Y2 = this.y;
     int Angle2 = 180;
-    int Delta2 = -5;
     int Angle = this.Angle1;
 
     public Vizor vizor;
@@ -51,7 +50,21 @@ public class Enemy {
         }
         return false;
     }
-    //todo:
+
+
+    //void patrol(){
+    //    this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
+    //}
+
+    //void rotating(){
+    //    if (this.Angle < this.Angle2) {
+    //        this.Angle += this.Delta2;
+    //    }
+    //    if (this.Angle > this.Angle1) {
+    //        this.Angle -= this.Delta2;
+    //    }
+    //}
+
     void posUpdate(Hero hero){
 
 
@@ -79,36 +92,57 @@ public class Enemy {
         //    if
         //        this.x += v * ((this.curTime - this.prevTime)/4);
 
-        if (vizor.ISeeYou != 1){
-            if (((int)this.x <= this.X2 && this.y <= this.Y2) && ((int)this.x >= this.X1 && this.y >= this.Y1) && (this.Angle > this.Angle1)){
+        // 1 - patrol;
+        // 2 - rotating;
+        // 3 - pursuit;
+        // 4 - returning;
+
+        if (vizor.ISeeYou != 1) {
+            if ((((int) this.x <= this.X2 && this.y <= this.Y2) && (this.Angle > this.Angle1))
+                    || ((int) this.x >= this.X1 && this.y >= this.Y1) && (this.Angle < this.Angle2)) {
                 this.enemystate = 2;
-            }
-            else{
 
+            } else {
+                this.enemystate = 1;
             }
 
+            System.out.println(enemystate);
         }
 
 
-
-
-        if ((int)this.x <= this.X2 && this.y <= this.Y2){
-            if (this.Angle > this.Angle1) {
-                this.Angle += this.Delta2;
-            }
-            else{
-                this.vx = -1 * this.vx;
-            }
-        }
-        if ((int)this.x >= this.X1 && this.y >= this.Y1){
+        if (enemystate == 2){
             if (this.Angle < this.Angle2) {
-                this.Angle += this.Delta1;
+                this.Angle += this.Delta;
             }
-            else{
-                vx = -1 * this.vx;
+            else if (this.Angle > this.Angle1) {
+                this.Angle += this.Delta;
             }
         }
-        this.x += vx * ((this.curTime - this.prevTime)/4);
+
+        if (enemystate == 1){
+            this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
+        }
+
+
+
+
+    //    if ((int)this.x <= this.X2 && this.y <= this.Y2){
+    //        if (this.Angle > this.Angle1) {
+    //            this.Angle += this.Delta2;
+    //        }
+    //        else{
+    //            this.vx = -1 * this.vx;
+    //        }
+    //    }
+    //    if ((int)this.x >= this.X1 && this.y >= this.Y1){
+    //        if (this.Angle < this.Angle2) {
+    //            this.Angle += this.Delta1;
+    //        }
+    //        else{
+    //            vx = -1 * this.vx;
+    //        }
+    //    }
+    //    this.x += vx * ((this.curTime - this.prevTime)/4);
 
 
         System.out.println(this.Angle + "        " + this.vx + "        " + this.x + "        " + this.y);
