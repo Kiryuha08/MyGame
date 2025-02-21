@@ -99,14 +99,14 @@ public class Enemy {
 
         if (vizor.ISeeYou != 1) {
             if ((((int) this.x <= this.X2 && this.y <= this.Y2) && (this.Angle > this.Angle1))
-                    || ((int) this.x >= this.X1 && this.y >= this.Y1) && (this.Angle < this.Angle2)) {
+                    || (((int) this.x >= this.X1 && this.y >= this.Y1) && (this.Angle < this.Angle2))) {
                 this.enemystate = 2;
 
             } else {
                 this.enemystate = 1;
             }
 
-            System.out.println(enemystate);
+            System.out.println(enemystate + "     "  +this.y+ "         " +this.Y1+ "         " + (this.y <= this.Y2));
         }
 
 
