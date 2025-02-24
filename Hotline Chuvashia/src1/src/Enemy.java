@@ -13,19 +13,19 @@ public class Enemy {
     int HeShooting = 0;
     long curTime;
     long prevTime = 0;
-    int enemystate;
-    // 1 - patrol;
-    // 2 - rotating;
-    // 3 - pursuit;
-    // 4 - returning;
+    int patrol;
+    int rotating;
+    int pursuit;
+    int returning;
 
     double X1 = 700;
     double Y1 = this.y;
     int Angle1 = 0;
-    int Delta = 5;
+    int Delta1 = 5;
     double X2 = 100;
     double Y2 = this.y;
     int Angle2 = 180;
+    int Delta2 = -5;
     int Angle = this.Angle1;
 
     public Vizor vizor;
@@ -50,21 +50,7 @@ public class Enemy {
         }
         return false;
     }
-
-
-    //void patrol(){
-    //    this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
-    //}
-
-    //void rotating(){
-    //    if (this.Angle < this.Angle2) {
-    //        this.Angle += this.Delta2;
-    //    }
-    //    if (this.Angle > this.Angle1) {
-    //        this.Angle -= this.Delta2;
-    //    }
-    //}
-
+    //todo:
     void posUpdate(Hero hero){
 
 
@@ -92,63 +78,27 @@ public class Enemy {
         //    if
         //        this.x += v * ((this.curTime - this.prevTime)/4);
 
-        // 1 - patrol;
-        // 2 - rotating;
-        // 3 - pursuit;
-        // 4 - returning;
 
-        if (vizor.ISeeYou != 1) {
-            if ((((int) this.x <= this.X2) && (this.Angle > this.Angle1))
-                    || (((int) this.x >= this.X1) && (this.Angle < this.Angle2))) {
-                this.enemystate = 2;
-
-            } else {
-                this.enemystate = 1;
+        if (this.x <= this.X2 && this.y <= this.Y2){
+            if (this.Angle > this.Angle1) {
+                this.Angle += this.Delta2;
             }
-
-            System.out.println(enemystate + "     "  +this.y+ "         " +this.Y1+ "         " + (this.y <= this.Y2));
+            else{
+                this.vx = -1 * this.vx;
+            }
         }
-
-
-        if (enemystate == 2){
+        if (this.x >= this.X1 && this.y >= this.Y1){
             if (this.Angle < this.Angle2) {
-                this.Angle += this.Delta;
+                this.Angle += this.Delta1;
             }
-            else if (this.Angle > this.Angle1) {
-                this.Angle += this.Delta;
-                if (this.Angle == 360){
-                    this.Angle = 0;
-                }
+            else{
+                vx = -1 * this.vx;
             }
         }
-
-        if (enemystate == 1){
-            this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
-        }
+        this.x += vx * ((this.curTime - this.prevTime)/4);
 
 
-
-
-    //    if ((int)this.x <= this.X2 && this.y <= this.Y2){
-    //        if (this.Angle > this.Angle1) {
-    //            this.Angle += this.Delta2;
-    //        }
-    //        else{
-    //            this.vx = -1 * this.vx;
-    //        }
-    //    }
-    //    if ((int)this.x >= this.X1 && this.y >= this.Y1){
-    //        if (this.Angle < this.Angle2) {
-    //            this.Angle += this.Delta1;
-    //        }
-    //        else{
-    //            vx = -1 * this.vx;
-    //        }
-    //    }
-    //    this.x += vx * ((this.curTime - this.prevTime)/4);
-
-
-        System.out.println(this.Angle + "        " + this.vx + "        " + this.x + "        " + this.y);
+        System.out.println(this.Angle + "        " + this.vx);
         this.HeShooting = 0;
         this.prevTime = this.curTime;
 
@@ -186,7 +136,7 @@ public class Enemy {
 
     void paint(Graphics g) {
         //System.out.println(IsDead);
-        vizor.paint(g, this);
+        vizor.paint(g);
         g.setColor(Color.RED);
         if (this.IsDead != 1) {
             g.fillRect((int) this.x - WH/2, (int) this.y - WH/2, WH, WH);

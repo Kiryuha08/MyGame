@@ -21,6 +21,9 @@ public class Hero {
     double degrees;
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
+    public int[][] HeroPoints;
+    int X;
+    int Y;
 
 
     public Hero(int x, int y) throws IOException {
@@ -28,6 +31,7 @@ public class Hero {
 
         this.x = x;
         this.y = y;
+        this.HeroPoints = new int[800][600];
     }
 
     public static BufferedImage rotateImage(BufferedImage imageToRotate, double degrees) {
@@ -46,6 +50,7 @@ public class Hero {
     }
 
     void wallInteraction(Walls wall){
+        // TODO: заменить проверку доступности точки на room.BanPoints
         /*if(((int)this.x == wall.x + wall.wWidx) && ((int)this.y -
                 this.WiHgh/2<= wall.y+ wall.wLeny && (int)this.y + this.WiHgh/2 >= wall.y)){
             this.NextToWall = 1;        //столкновение с левой стенкой
@@ -75,8 +80,8 @@ public class Hero {
     void paint(Graphics g) {
         g.setColor(Color.gray);
         if (YouDead != 1){
-            g.drawImage(rotateImage(this.BGImage, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
-            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
+            g.drawImage(rotateImage(this.BGImage, this.degrees), (int)this.x-150, (int)this.y-WiHgh-130, null);
+            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh, WiHgh, WiHgh);
         }
     }
 
@@ -121,8 +126,8 @@ public class Hero {
 
         }
 
-        for (int i = (int)this.x - this.WiHgh/2; i <= (int)this.x + this.WiHgh/2; i ++){
-            for (int j = (int)this.y - this.WiHgh/2; j <= (int)this.y + this.WiHgh/2; j ++){
+        for (int i = (int)this.x; i <= (int)this.x + this.WiHgh; i ++){
+            for (int j = (int)this.y; j <= (int)this.y + this.WiHgh; j ++){
                 if (i >= 0 && i < 800 && j >=0 && j < 600)
                     room.RoomPoints[i][j] = 2;
             }
