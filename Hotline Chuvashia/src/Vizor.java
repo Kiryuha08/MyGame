@@ -35,6 +35,7 @@ public class Vizor {
                 if (enemy.room.RoomPoints[x][y] != 1){
                     enemy.room.RoomPoints[x][y] = 3;
                 } else {
+                    this.ISeeYou = 0;
                     break;
                 }
 
