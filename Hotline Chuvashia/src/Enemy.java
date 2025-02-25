@@ -97,7 +97,7 @@ public class Enemy {
         // 3 - pursuit;
         // 4 - returning;
 
-        if (vizor.ISeeYou != 1) {
+        if (vizor.ISeeYou == 0) {
             if ((((int) this.x <= this.X2) && (this.Angle > this.Angle1))
                     || (((int) this.x >= this.X1) && (this.Angle < this.Angle2))) {
                 this.enemystate = 2;
@@ -107,6 +107,9 @@ public class Enemy {
             }
 
             System.out.println(enemystate + "     "  +this.y+ "         " +this.Y1+ "         " + (this.y <= this.Y2));
+        }
+        if (vizor.ISeeYou == 1){
+            this.enemystate = 3;
         }
 
 
@@ -148,7 +151,7 @@ public class Enemy {
     //    this.x += vx * ((this.curTime - this.prevTime)/4);
 
 
-        System.out.println(this.Angle + "        " + this.vx + "        " + this.x + "        " + this.y);
+        System.out.println(this.enemystate + "        " + this.Angle + "        " + this.vx + "        " + this.x + "        " + vizor.ISeeYou);
         this.HeShooting = 0;
         this.prevTime = this.curTime;
 
