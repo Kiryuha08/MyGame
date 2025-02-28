@@ -19,12 +19,13 @@ public class Hero {
     long prevTime = 0;
     BufferedImage BGImage;
     double degrees;
+    int HeroIsAttack = 0;
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
 
 
     public Hero(int x, int y) throws IOException {
-        this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
+        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
 
         this.x = x;
         this.y = y;
@@ -71,6 +72,8 @@ public class Hero {
         }*/
         //System.out.println(this.NextToWall);
     }
+
+
 
     void paint(Graphics g) {
         g.setColor(Color.gray);
@@ -123,8 +126,12 @@ public class Hero {
 
         for (int i = (int)this.x - this.WiHgh/2; i <= (int)this.x + this.WiHgh/2; i ++){
             for (int j = (int)this.y - this.WiHgh/2; j <= (int)this.y + this.WiHgh/2; j ++){
-                if (i >= 0 && i < 800 && j >=0 && j < 600)
+                if (i >= 0 && i < 800 && j >=0 && j < 600) {
                     room.RoomPoints[i][j] = 2;
+                    if (room.RoomPoints[i][j] == 4){
+                        this.HeroIsAttack = 1;
+                    }
+                }
             }
         }
 
@@ -150,6 +157,13 @@ public class Hero {
             }
         }*/
         this.prevTime = this.curTime;
+    }
+
+    void HeroAttack(Room room){
+        if(this.HeroIsAttack == 1){
+            System.out.println("hui");
+
+        }
     }
 
 }
