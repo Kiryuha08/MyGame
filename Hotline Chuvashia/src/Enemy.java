@@ -97,7 +97,7 @@ public class Enemy {
         // 3 - pursuit;
         // 4 - returning;
 
-        if (vizor.ISeeYou == 0) {
+        if (vizor.ISeeYou == 0 && enemystate != 3) {
             if ((((int) this.x <= this.X2) && (this.Angle > this.Angle1))
                     || (((int) this.x >= this.X1) && (this.Angle < this.Angle2))) {
                 this.enemystate = 2;
@@ -110,6 +110,18 @@ public class Enemy {
         }
         if (vizor.ISeeYou == 1){
             this.enemystate = 3;
+        }
+        if (enemystate == 3){
+            // расчитать траекторию движения dX dY от текущей точки до точки, где последний развидел героя
+            double angle;
+            if (vizor.heroX - this.x != 0) {
+                angle = Math.atan((vizor.heroY - this.y) / (vizor.heroX - this.x));
+                this.Angle = (int)Math.toDegrees(angle);
+            }
+            else {
+                this.Angle = 180 - (int)Math.signum(vizor.heroY - this.y) * 90;
+            }
+            //double dX = (vizor.heroX - this.x) ;
         }
 
 

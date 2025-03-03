@@ -9,6 +9,8 @@ public class Vizor {
     int enStatus = 1;   // жив ли враг?
     int Diametr = 800;
     int ISeeYou = 0;
+    int heroX;
+    int heroY;
 
 
 
@@ -31,6 +33,8 @@ public class Vizor {
                 if (enemy.room.RoomPoints[x][y] == 2) {
                     //System.out.println("i see you");
                     this.ISeeYou = 1;
+                    this.heroX = x;
+                    this.heroY = y;
                 }
                 if (enemy.room.RoomPoints[x][y] != 1){
                     enemy.room.RoomPoints[x][y] = 3;
