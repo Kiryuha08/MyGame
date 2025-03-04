@@ -31,7 +31,7 @@ public class Vizor {
                 y = (int)(n * Math.sin(Math.toRadians(a)) + enemy.y);
                 if ((x < 0) || (y < 0) || (x >= 800) || (y >= 600)) continue;
                 if (enemy.room.RoomPoints[x][y] == 2) {
-                    //System.out.println("i see you");
+                    System.out.println("i see you");
                     this.ISeeYou = 1;
                     this.heroX = x;
                     this.heroY = y;

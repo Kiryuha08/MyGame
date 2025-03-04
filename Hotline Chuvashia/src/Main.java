@@ -9,13 +9,13 @@ import java.io.File;
 public class Main {
     public static void main(String[] args) throws IOException {
         BG bg = new BG();
-        Hero hero = new Hero(400,50);
+        Hero hero = new Hero(300,50);
         Room rooms = new Room();
         rooms.AddWalls(400, 300, 550, 450);
         //rooms.AddWalls(100, 100, 150, 250);
 
         rooms.AddEnemy(375, 100);
-        rooms.AddEnemy(175, 200);
+        //rooms.AddEnemy(175, 200);
         //Enemy enemy = new Enemy(375, 200);
         //Bullet bullet = new Bullet((int)enemy.x + enemy.WH/2, (int)enemy.y + enemy.WH/2);
         //Walls wall = new Walls(400, 300, 150, 150);
