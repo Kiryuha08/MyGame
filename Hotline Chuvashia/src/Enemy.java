@@ -52,6 +52,8 @@ public class Enemy {
     }
 
 
+
+
     //void patrol(){
     //    this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
     //}
@@ -73,6 +75,17 @@ public class Enemy {
             this.prevTime = this.curTime;
         }
 
+
+
+
+
+        for (int i = (int)this.x - this.WH/2; i <= (int)this.x + this.WH/2; i ++){
+            for (int j = (int) this.y - this.WH / 2; j <= (int) this.y + this.WH / 2; j++) {
+                if (i >= 0 && i < 800 && j >= 0 && j < 600) {
+                    room.RoomPoints[i][j] = 4;
+                }
+            }
+        }
         //if (this.moving )
         //
 //

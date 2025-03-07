@@ -25,7 +25,7 @@ public class Hero {
 
 
     public Hero(int x, int y) throws IOException {
-        this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
+        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
 
         this.x = x;
         this.y = y;
@@ -127,10 +127,10 @@ public class Hero {
         for (int i = (int)this.x - this.WiHgh/2; i <= (int)this.x + this.WiHgh/2; i ++){
             for (int j = (int)this.y - this.WiHgh/2; j <= (int)this.y + this.WiHgh/2; j ++){
                 if (i >= 0 && i < 800 && j >=0 && j < 600) {
-                    room.RoomPoints[i][j] = 2;
                     if (room.RoomPoints[i][j] == 4){
                         this.HeroIsAttack = 1;
                     }
+                    room.RoomPoints[i][j] = 2;
                 }
             }
         }
@@ -162,6 +162,7 @@ public class Hero {
     void HeroAttack(Room room){
         if(this.HeroIsAttack == 1){
             System.out.println("hui");
+            this.HeroIsAttack = 0;
 
         }
     }
