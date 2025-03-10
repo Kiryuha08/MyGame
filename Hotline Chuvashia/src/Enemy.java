@@ -7,6 +7,7 @@ public class Enemy {
     double y;
     double vx = 0.2;
     double vy = 0;
+    double v = 0.5;
     int WH = 50;
     int IsDead = 0;
     int ShootDist = 50;
@@ -140,7 +141,14 @@ public class Enemy {
                 this.Angle = -180 + (int)Math.signum(vizor.heroY - this.y) * 90;
                 System.out.println();
             }
-            //double dX = (vizor.heroX - this.x) ;
+
+            double dX = (vizor.heroX - ((this. - 90) / 90) * this.x);
+            double dY = (vizor.heroY - ((this. - 90) / 90) * this.y);
+            System.out.println(vizor.Angle);
+            if (this.x != dX && this.y != dY){
+                this.x += v * Math.cos(vizor.Angle);
+                this.y += v * Math.sin(vizor.Angle);
+            }
         }
 
 

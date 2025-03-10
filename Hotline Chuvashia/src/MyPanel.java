@@ -52,6 +52,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
         }
 
         hero.posUpdate(room);
+        hero.HeroAttack(room);
         hero.paint(g);
 
         for (Enemy enemy : room.Enemies){
