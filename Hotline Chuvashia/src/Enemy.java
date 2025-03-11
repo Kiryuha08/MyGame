@@ -7,7 +7,7 @@ public class Enemy {
     double y;
     double vx = 0.2;
     double vy = 0;
-    double v = 0.5;
+    double v = 5.0;
     int WH = 50;
     int IsDead = 0;
     int ShootDist = 50;
@@ -112,6 +112,12 @@ public class Enemy {
         // 4 - returning;
 
         if (vizor.ISeeYou == 0 && enemystate != 3) {
+            System.out.println(Y1 + "      " + Y2);
+            if (this.y < this.Y1 - 1 || this.y > this.Y1 + 1){
+                this.y += this.vy*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
+
+
+            }
             if ((((int) this.x <= this.X2) && (this.Angle > this.Angle1))
                     || (((int) this.x >= this.X1) && (this.Angle < this.Angle2))) {
                 this.enemystate = 2;
@@ -142,13 +148,17 @@ public class Enemy {
                 System.out.println();
             }
 
-            double dX = (vizor.heroX - ((this. - 90) / 90) * this.x);
-            double dY = (vizor.heroY - ((this. - 90) / 90) * this.y);
-            System.out.println(vizor.Angle);
+            double dX = (vizor.heroX - (this.Angle - 90)/90 * this.x);
+            double dY = (vizor.heroY - (this.Angle - 90)/90 * this.y);
+            //System.out.println(this.Angle);
             if (this.x != dX && this.y != dY){
-                this.x += v * Math.cos(vizor.Angle);
-                this.y += v * Math.sin(vizor.Angle);
+                this.x += v * Math.cos(this.Angle);
+                this.y += v * Math.sin(this.Angle);
             }
+        }
+
+        if (enemystate == 4){
+
         }
 
 
