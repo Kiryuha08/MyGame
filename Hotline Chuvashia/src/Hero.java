@@ -25,7 +25,7 @@ public class Hero {
 
 
     public Hero(int x, int y) throws IOException {
-        this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
+        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
 
         this.x = x;
         this.y = y;
