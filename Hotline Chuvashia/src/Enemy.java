@@ -80,14 +80,6 @@ public class Enemy {
 
 
 
-     //   for (int i = (int)this.x - this.WH/2; i <= (int)this.x + this.WH/2; i ++){
-     //       for (int j = (int) this.y - this.WH / 2; j <= (int) this.y + this.WH / 2; j++) {
-     //           if (i >= 0 && i < 800 && j >= 0 && j < 600) {
-     //               room.RoomPoints[i][j] = 4;
-     //           }
-     //       }
-     //   }
-
         for (int i = (int)this.x - this.WH/2; i <= (int)this.x + this.WH/2; i++) {
             for (int j = (int)this.y - this.WH/2; j <= (int)this.y + this.WH/2; j++) {
                 if (i >= 0 && i < 800 && j >= 0 && j < 600) {
@@ -100,13 +92,6 @@ public class Enemy {
                 }
             }
         }
-
-
-        if (this.IsDead != 1) {
-
-        }
-
-
         //if (this.moving )
         //
 //
@@ -133,7 +118,7 @@ public class Enemy {
 
         if (vizor.ISeeYou == 0 && enemystate != 3) {
             System.out.println(Y1 + "      " + Y2);
-            if (this.y < this.Y1 - 0.01 || this.y > this.Y1 + 0.01){
+            if (this.y < this.Y1 - 1 || this.y > this.Y1 + 1){
                 this.y += this.vy*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
 
 
@@ -258,9 +243,9 @@ public class Enemy {
 
     void paint(Graphics g) {
         //System.out.println(IsDead);
+        vizor.paint(g, this);
+        g.setColor(Color.RED);
         if (this.IsDead != 1) {
-            vizor.paint(g, this);
-            g.setColor(Color.RED);
             g.fillRect((int) this.x - WH/2, (int) this.y - WH/2, WH, WH);
         }
         //else{
