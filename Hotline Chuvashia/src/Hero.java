@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Hero {
     double x;
@@ -18,14 +20,16 @@ public class Hero {
     long curTime;
     long prevTime = 0;
     BufferedImage BGImage;
+    BufferedImage BGImage1;
     double degrees;
-    int HeroIsAttack = 0;
+    int HeroIsAttack;
     //int sx; // расстояние от x до xd
     //int sy; // расстояние от y до yd
 
 
     public Hero(int x, int y) throws IOException {
         this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
+        this.BGImage1 = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black1.png"));
 
         this.x = x;
         this.y = y;
@@ -75,13 +79,19 @@ public class Hero {
 
 
 
-    void paint(Graphics g) {
-        g.setColor(Color.gray);
-        if (YouDead != 1){
-            g.drawImage(rotateImage(this.BGImage, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
-            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
-        }
-    }
+    //void paint(Graphics g) {
+    //    g.setColor(Color.gray);
+    //    if (YouDead != 1){
+    //        if (HeroIsAttack == 1){
+    //            g.drawImage(rotateImage(this.BGImage1, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
+    //
+    //        }
+    //        else {
+    //            g.drawImage(rotateImage(this.BGImage, this.degrees), (int) this.x - 150, (int) this.y - WiHgh / 2 - 130, null);
+    //        }
+    //        g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
+    //    }
+    //}
 
 
     void posUpdate(Room room){
@@ -124,16 +134,22 @@ public class Hero {
 
         }
 
-        for (int i = (int)this.x - this.WiHgh/2; i <= (int)this.x + this.WiHgh/2; i ++){
-            for (int j = (int)this.y - this.WiHgh/2; j <= (int)this.y + this.WiHgh/2; j ++){
-                if (i >= 0 && i < 800 && j >=0 && j < 600) {
-                    //System.out.println(room.RoomPoints[i][j]);
-                    if (room.RoomPoints[i][j] == 4){
+        for (int i = (int) this.x - this.WiHgh / 2; i <= (int) this.x + this.WiHgh / 2; i++) {
+            for (int j = (int) this.y - this.WiHgh / 2; j <= (int) this.y + this.WiHgh / 2; j++) {
+                if (i >= 0 && i < 800 && j >= 0 && j < 600) {
+                    if (room.RoomPoints[i][j] == 4) {
                         this.HeroIsAttack = 1;
+                        // Запускаем таймер для возврата изображения через 500 мс
+                    //    new Timer().schedule(new TimerTask() {
+                    //        @Override
+                    //        public void run() {
+                    //            HeroIsAttack = 0;
+                    //        }
+                    //    }, 500);
                     }
+                    System.out.println(HeroIsAttack);
                     room.RoomPoints[i][j] = 2;
                 }
-
             }
         }
 
@@ -158,16 +174,35 @@ public class Hero {
                 //System.out.println(y);
             }
         }*/
+
         this.prevTime = this.curTime;
     }
 
-    void HeroAttack(Room room){
-        if(this.HeroIsAttack == 1){
-            System.out.println("hui");
-            this.HeroIsAttack = 0;
-
+    void paint(Graphics g) {
+        g.setColor(Color.gray);
+        if (YouDead != 1){
+            System.out.println(HeroIsAttack);
+            if (HeroIsAttack == 1){
+                System.out.println("+________________+");
+                g.drawImage(rotateImage(this.BGImage1, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
+            }
+            else {
+                g.drawImage(rotateImage(this.BGImage, this.degrees), (int) this.x - 150, (int) this.y - WiHgh / 2 - 130, null);
+            }
+            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
         }
-        //System.out.println(HeroIsAttack);
     }
+
+
+
+
+    //void HeroAttack(Room room){
+    //    if(this.HeroIsAttack == 1){
+    //        System.out.println("hui");
+    //        this.HeroIsAttack = 0;
+//
+    //    }
+    //    //System.out.println(HeroIsAttack);
+    //}
 
 }

@@ -79,16 +79,26 @@ public class Enemy {
 
 
 
-
+        int HeroKilledMe = 0;
         for (int i = (int)this.x - this.WH/2; i <= (int)this.x + this.WH/2; i++) {
+            if (HeroKilledMe == 1){
+                break;
+            }
             for (int j = (int)this.y - this.WH/2; j <= (int)this.y + this.WH/2; j++) {
                 if (i >= 0 && i < 800 && j >= 0 && j < 600) {
                     if (room.RoomPoints[i][j] == 2) {  // 2 means hero's area
+                        hero.HeroIsAttack = 1;
                         this.IsDead = 1;  // Set enemy to dead
                         System.out.println("Enemy has been killed!");
+                        HeroKilledMe = 1;
                         break;  // Exit the loop since enemy is dead
                     }
+                    else{
+                        hero.HeroIsAttack = 0;
+                    }
+                    System.out.println(hero.HeroIsAttack);
                     room.RoomPoints[i][j] = 4;
+
                 }
             }
         }
@@ -226,18 +236,18 @@ public class Enemy {
     //}
 
 
-    boolean isCollided(Hero hero) {
-        if (hero.YouDead != 1) {
-            if ((((int) this.x <= hero.x + hero.WiHgh) && ((int) this.x + this.WH >= hero.x)) && (((int) this.y <= hero.y + hero.WiHgh / 2) && ((int) this.y + this.WH >= hero.y - hero.WiHgh / 2))) {
-                //|| (((int)this.x == hero.x + hero.WiHgh || (int)this.x+this.WH == hero.x) && (int)this.y-this.WH == hero.y)){
-                return true;
-            } else {
-                return false;
-            }
-
-        }
-        return false;
-    }
+    //boolean isCollided(Hero hero) {
+    //    if (hero.YouDead != 1) {
+    //        if ((((int) this.x <= hero.x + hero.WiHgh) && ((int) this.x + this.WH >= hero.x)) && (((int) this.y <= hero.y + hero.WiHgh / 2) && ((int) this.y + this.WH >= hero.y - hero.WiHgh / 2))) {
+    //            //|| (((int)this.x == hero.x + hero.WiHgh || (int)this.x+this.WH == hero.x) && (int)this.y-this.WH == hero.y)){
+    //            return true;
+    //        } else {
+    //            return false;
+    //        }
+//
+    //    }
+    //    return false;
+    //}
 
 
 
