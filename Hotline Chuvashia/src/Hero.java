@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -49,6 +50,23 @@ public class Hero {
 
         return newImageFromBuffer;
     }
+
+
+    public class AudioPlayer {
+
+        public static void playSound(String filePath) {
+            try {
+                File soundFile = new File(filePath);
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     void wallInteraction(Walls wall){
         /*if(((int)this.x == wall.x + wall.wWidx) && ((int)this.y -
@@ -139,6 +157,7 @@ public class Hero {
                 if (i >= 0 && i < 800 && j >= 0 && j < 600) {
                     if (room.RoomPoints[i][j] == 4) {
                         this.HeroIsAttack = 1;
+                        AudioPlayer.playSound(data\\brue.mp3");
                         // Запускаем таймер для возврата изображения через 500 мс
                     //    new Timer().schedule(new TimerTask() {
                     //        @Override
