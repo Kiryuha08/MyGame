@@ -96,7 +96,7 @@ public class Enemy {
                     else{
                         hero.HeroIsAttack = 0;
                     }
-                    System.out.println(hero.HeroIsAttack);
+                    //System.out.println(hero.HeroIsAttack);
                     room.RoomPoints[i][j] = 4;
 
                 }

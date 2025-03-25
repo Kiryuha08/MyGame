@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class Hero {
     double x;
@@ -20,8 +21,10 @@ public class Hero {
     int NextToWall = 0;
     long curTime;
     long prevTime = 0;
+    int Time;
     BufferedImage BGImage;
     BufferedImage BGImage1;
+    BufferedImage image;
     double degrees;
     int HeroIsAttack;
     //int sx; // расстояние от x до xd
@@ -29,8 +32,9 @@ public class Hero {
 
 
     public Hero(int x, int y) throws IOException {
-        this.BGImage = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black.png"));
-        this.BGImage1 = ImageIO.read(new File("data\\png-clipart-protective-gear-in-sports-top-view-people-sport-black1.png"));
+        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroBasic1.png"));
+        this.BGImage1 = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroKill1.png"));
+        this.image = this.BGImage;
 
         this.x = x;
         this.y = y;
@@ -125,8 +129,23 @@ public class Hero {
         x1 = this.x + Math.signum(this.xd - this.x) * vx * ((this.curTime - this.prevTime)/4);
         y1 = this.y + Math.signum(this.yd - this.y) * vy * ((this.curTime - this.prevTime)/4);
 
+        if (this.x - this.xd == 0 && this.y - this.yd > 0)
+            this.degrees = 0;
+        if (this.x - this.xd < 0 && this.y - this.yd > 0)
+            this.degrees = Math.PI/4;
+        if (this.x - this.xd < 0 && this.y - this.yd == 0)
+            this.degrees = Math.PI/2;
+        if (this.x - this.xd < 0 && this.y - this.yd < 0)
+            this.degrees = 3*Math.PI/4;;
+        if (this.x - this.xd == 0 && this.y - this.yd < 0)
+            this.degrees = Math.PI;
+        if (this.x - this.xd > 0 && this.y - this.yd < 0)
+            this.degrees = 5*Math.PI/4;
+        if (this.x - this.xd > 0 && this.y - this.yd == 0)
+            this.degrees = 3*Math.PI/2;
+        if (this.x - this.xd > 0 && this.y - this.yd > 0)
+            this.degrees = 7*Math.PI/4;
 
-        //this.degrees = 45 * Math.signum(this.yd - this.y);
 
 
         if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
@@ -141,13 +160,13 @@ public class Hero {
                 && (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
             ) {
                 this.y = y1;
-                //this.degrees = 45 * Math.signum(this.yd - this.y);
+
             }
             if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y - WiHgh/2)) == 1)
                 && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y + WiHgh/2)) == 1)
             ) {
                 this.x = x1;
-                //this.degrees = 45 * Math.signum(this.xd - this.x);
+
             }
 
         }
@@ -157,7 +176,7 @@ public class Hero {
                 if (i >= 0 && i < 800 && j >= 0 && j < 600) {
                     if (room.RoomPoints[i][j] == 4) {
                         this.HeroIsAttack = 1;
-                        AudioPlayer.playSound(data\\brue.mp3");
+                        AudioPlayer.playSound("Hotline Chuvashia\\data\\brue.mp3");
                         // Запускаем таймер для возврата изображения через 500 мс
                     //    new Timer().schedule(new TimerTask() {
                     //        @Override
@@ -166,7 +185,7 @@ public class Hero {
                     //        }
                     //    }, 500);
                     }
-                    System.out.println(HeroIsAttack);
+                    //System.out.println(HeroIsAttack);
                     room.RoomPoints[i][j] = 2;
                 }
             }
@@ -194,23 +213,33 @@ public class Hero {
             }
         }*/
 
-        this.prevTime = this.curTime;
+
     }
 
     void paint(Graphics g) {
         g.setColor(Color.gray);
-        if (YouDead != 1){
-            System.out.println(HeroIsAttack);
-            if (HeroIsAttack == 1){
+        if (YouDead != 1) {
+            //System.out.println(HeroIsAttack);
+            if (HeroIsAttack == 1) {
                 System.out.println("+________________+");
-                g.drawImage(rotateImage(this.BGImage1, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
+                this.image = this.BGImage1;
+                this.Time = 0;
             }
-            else {
-                g.drawImage(rotateImage(this.BGImage, this.degrees), (int) this.x - 150, (int) this.y - WiHgh / 2 - 130, null);
+            System.out.println(this.degrees);
+
+            //g.fillRect((int) this.x - WiHgh / 2, (int) this.y - WiHgh / 2, WiHgh, WiHgh);
+            g.drawImage(rotateImage(this.image, this.degrees), (int) this.x - WiHgh / 2, (int) this.y - WiHgh / 2, null);
+            if (this.Time / 500 < 1) {
+                this.Time += (this.curTime - this.prevTime);
+            } else {
+                this.image = BGImage;
             }
-            g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
         }
+
+        this.prevTime = this.curTime;
     }
+
+
 
 
 
