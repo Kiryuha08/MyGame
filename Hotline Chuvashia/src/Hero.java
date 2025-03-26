@@ -32,8 +32,8 @@ public class Hero {
 
 
     public Hero(int x, int y) throws IOException {
-        this.BGImage = ImageIO.read(new File("data\\HeroBasic1.png"));
-        this.BGImage1 = ImageIO.read(new File("data\\HeroKill1.png"));
+        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroBasic1.png"));
+        this.BGImage1 = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroKill1.png"));
         this.image = this.BGImage;
 
         this.x = x;
@@ -126,8 +126,8 @@ public class Hero {
 
 
         double x1, y1;
-        x1 = (int)this.x + Math.signum(this.xd - (int)this.x) * vx * ((this.curTime - this.prevTime)/4);
-        y1 = (int)this.y + Math.signum(this.yd - (int)this.y) * vy * ((this.curTime - this.prevTime)/4);
+        x1 = (int)((int)this.x + Math.signum(this.xd - (int)this.x) * vx * ((this.curTime - this.prevTime)/4));
+        y1 = (int)((int)this.y + Math.signum(this.yd - (int)this.y) * vy * ((this.curTime - this.prevTime)/4));
 
         if (this.x - this.xd == 0 && this.y - this.yd > 0)
             this.degrees = 0;
@@ -221,11 +221,11 @@ public class Hero {
         if (YouDead != 1) {
             //System.out.println(HeroIsAttack);
             if (HeroIsAttack == 1) {
-                System.out.println("+________________+");
+                //System.out.println("+________________+");
                 this.image = this.BGImage1;
                 this.Time = 0;
             }
-            System.out.println(this.degrees);
+            //System.out.println(this.degrees);
 
             //g.fillRect((int) this.x - WiHgh / 2, (int) this.y - WiHgh / 2, WiHgh, WiHgh);
             g.drawImage(rotateImage(this.image, this.degrees), (int) this.x - WiHgh / 2, (int) this.y - WiHgh / 2, null);

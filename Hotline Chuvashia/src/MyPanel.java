@@ -58,8 +58,8 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
         for (Enemy enemy : room.Enemies){
             if (enemy.IsDead == 0){
                 enemy.posUpdate(this.hero);
-                enemy.paint(g);
             }
+            enemy.paint(g);
         }
         //hero.wallInteraction(room.walls.get(0));
         //vizorEn.PosUpdate(enemy);

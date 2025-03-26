@@ -34,6 +34,7 @@ public class Enemy {
     int Angle = this.Angle1;
 
     BufferedImage Image;
+    BufferedImage Image1;
 
     public Vizor vizor;
     public Room room;
@@ -45,9 +46,26 @@ public class Enemy {
         this.room = room;
         this.vizor = new Vizor(x,y);
 
-        this.Image = ImageIO.read(new File("data\\EnemyBasic.png"));
+        this.Image = ImageIO.read(new File("Hotline Chuvashia\\data\\EnemyBasic1.png"));
+        this.Image1 = ImageIO.read(new File("Hotline Chuvashia\\data\\EnemyKilled1.png"));
 
     }
+
+    public static BufferedImage rotateImage(BufferedImage imageToRotate, double degrees) {
+        int widthOfImage = imageToRotate.getWidth();
+        int heightOfImage = imageToRotate.getHeight();
+        int typeOfImage = imageToRotate.getType();
+
+        BufferedImage newImageFromBuffer = new BufferedImage(widthOfImage, heightOfImage, typeOfImage);
+
+        Graphics2D graphics2D = newImageFromBuffer.createGraphics();
+
+        graphics2D.rotate(degrees, widthOfImage / 2, heightOfImage / 2);
+        graphics2D.drawImage(imageToRotate, null, 0, 0);
+
+        return newImageFromBuffer;
+    }
+
 
     boolean IsShooting(Hero hero){
         if (this.IsDead != 1) {
@@ -167,18 +185,23 @@ public class Enemy {
                 }
             }
             else {
-                this.Angle = -180 + (int)Math.signum(vizor.heroY - this.y) * 90;
+                this.Angle = 180 - (int)Math.signum(vizor.heroY - this.y) * 90;
             }
 
-            double dX = (vizor.heroX - (this.Angle - 90)/90 * this.x);
-            double dY = (vizor.heroY - (this.Angle - 90)/90 * this.y);
+            double dX = (vizor.heroX - /*(this.Angle - 90)/90 * */this.x);
+            double dY = (vizor.heroY - /*(this.Angle - 90)/90 * */this.y);
             //System.out.println(this.Angle);
-            if (this.x != dX && this.y != dY){
+            //System.out.println(Math.sqrt(Math.pow(this.x - dX, 2) + Math.pow(this.y - dY, 2)));
+            System.out.print(vizor.heroX);
+            System.out.print("-");
+            System.out.println(vizor.heroY);
+            if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 300){
                 this.x += v * Math.cos(this.Angle);
                 this.y += v * Math.sin(this.Angle);
+                System.out.println("!");
             }
         }
-        System.out.println(this.curTime - this.prevTime);
+        //System.out.println(this.curTime - this.prevTime);
         if (enemystate == 4){
 
         }
@@ -263,8 +286,11 @@ public class Enemy {
         vizor.paint(g, this);
         g.setColor(Color.RED);
         if (this.IsDead != 1) {
-            g.fillRect((int) this.x - WH/2, (int) this.y - WH/2, WH, WH);
-            g.drawImage(Image,(int) this.x - this.WH / 2, (int) this.y - this.WH / 2, null);
+            //g.fillRect((int) this.x - WH/2, (int) this.y - WH/2, WH, WH);
+            g.drawImage(rotateImage(Image,Math.toRadians(Angle)),(int) this.x - this.WH / 2, (int) this.y - this.WH / 2, null);
+        }
+        else{
+            g.drawImage(Image1,(int) this.x - this.WH / 2, (int) this.y - this.WH / 2, null);
         }
         //else{
         //    this.IsDead = 0;

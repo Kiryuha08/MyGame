@@ -33,7 +33,7 @@ public class Vizor {
                     if ((x < 0) || (y < 0) || (x >= 800) || (y >= 600)) continue;
                     //System.out.println(enemy.room.RoomPoints[x][y]);
                     if (enemy.room.RoomPoints[x][y] == 2) {
-                        System.out.println("i see you");
+                        //System.out.println("i see you");
                         this.ISeeYou = 1;
                         this.heroX = x;
                         this.heroY = y;
