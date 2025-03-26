@@ -32,8 +32,8 @@ public class Hero {
 
 
     public Hero(int x, int y) throws IOException {
-        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroBasic1.png"));
-        this.BGImage1 = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroKill1.png"));
+        this.BGImage = ImageIO.read(new File("data\\HeroBasic1.png"));
+        this.BGImage1 = ImageIO.read(new File("data\\HeroKill1.png"));
         this.image = this.BGImage;
 
         this.x = x;
@@ -126,8 +126,8 @@ public class Hero {
 
 
         double x1, y1;
-        x1 = this.x + Math.signum(this.xd - this.x) * vx * ((this.curTime - this.prevTime)/4);
-        y1 = this.y + Math.signum(this.yd - this.y) * vy * ((this.curTime - this.prevTime)/4);
+        x1 = (int)this.x + Math.signum(this.xd - (int)this.x) * vx * ((this.curTime - this.prevTime)/4);
+        y1 = (int)this.y + Math.signum(this.yd - (int)this.y) * vy * ((this.curTime - this.prevTime)/4);
 
         if (this.x - this.xd == 0 && this.y - this.yd > 0)
             this.degrees = 0;
@@ -148,22 +148,22 @@ public class Hero {
 
 
 
-        if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
-            && (room.pointCheck((int)(x1 - Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
-            && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 - Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)) {
+        if ((room.pointCheck((int)((int)x1 + Math.signum(this.xd - (int)this.x) * WiHgh / 2), (int)((int)y1 + Math.signum(this.yd - (int)this.y) * WiHgh / 2)) == 1)
+                && (room.pointCheck((int)(x1 - Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+                && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 - Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)) {
 
             this.x = x1;
             this.y = y1;
         }
         else {
-            if ((room.pointCheck((int)(this.x - WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
-                && (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+            if ((room.pointCheck((int)(this.x - WiHgh/2), (int)(y1 + Math.signum(this.yd - (int)this.y) * WiHgh / 2)) == 1)
+                    && (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - (int)this.y) * WiHgh / 2)) == 1)
             ) {
                 this.y = y1;
 
             }
-            if ((room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y - WiHgh/2)) == 1)
-                && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(this.y + WiHgh/2)) == 1)
+            if ((room.pointCheck((int)(x1 + Math.signum(this.xd - (int)this.x) * WiHgh / 2), (int)(this.y - WiHgh/2)) == 1)
+                    && (room.pointCheck((int)(x1 + Math.signum(this.xd - (int)this.x) * WiHgh / 2), (int)(this.y + WiHgh/2)) == 1)
             ) {
                 this.x = x1;
 
@@ -178,12 +178,12 @@ public class Hero {
                         this.HeroIsAttack = 1;
                         AudioPlayer.playSound("Hotline Chuvashia\\data\\brue.mp3");
                         // Запускаем таймер для возврата изображения через 500 мс
-                    //    new Timer().schedule(new TimerTask() {
-                    //        @Override
-                    //        public void run() {
-                    //            HeroIsAttack = 0;
-                    //        }
-                    //    }, 500);
+                        //    new Timer().schedule(new TimerTask() {
+                        //        @Override
+                        //        public void run() {
+                        //            HeroIsAttack = 0;
+                        //        }
+                        //    }, 500);
                     }
                     //System.out.println(HeroIsAttack);
                     room.RoomPoints[i][j] = 2;

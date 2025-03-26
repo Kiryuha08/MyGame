@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,7 +27,7 @@ public class Room {
         this.UpdateBanPoints();
     }
 
-    void AddEnemy(int x, int y){
+    void AddEnemy(int x, int y) throws IOException {
         this.Enemies.add(new Enemy(x,y, this));
     }
 

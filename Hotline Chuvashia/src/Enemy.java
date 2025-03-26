@@ -1,5 +1,9 @@
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Enemy {
@@ -29,15 +33,19 @@ public class Enemy {
     int Angle2 = 180;
     int Angle = this.Angle1;
 
+    BufferedImage Image;
+
     public Vizor vizor;
     public Room room;
 
 
-    public Enemy(int x, int y, Room room){
+    public Enemy(int x, int y, Room room) throws IOException {
         this.x = x;
         this.y = y;
         this.room = room;
         this.vizor = new Vizor(x,y);
+
+        this.Image = ImageIO.read(new File("data\\EnemyBasic.png"));
 
     }
 
@@ -160,7 +168,6 @@ public class Enemy {
             }
             else {
                 this.Angle = -180 + (int)Math.signum(vizor.heroY - this.y) * 90;
-                System.out.println();
             }
 
             double dX = (vizor.heroX - (this.Angle - 90)/90 * this.x);
@@ -171,7 +178,7 @@ public class Enemy {
                 this.y += v * Math.sin(this.Angle);
             }
         }
-
+        System.out.println(this.curTime - this.prevTime);
         if (enemystate == 4){
 
         }
@@ -257,6 +264,7 @@ public class Enemy {
         g.setColor(Color.RED);
         if (this.IsDead != 1) {
             g.fillRect((int) this.x - WH/2, (int) this.y - WH/2, WH, WH);
+            g.drawImage(Image,(int) this.x - this.WH / 2, (int) this.y - this.WH / 2, null);
         }
         //else{
         //    this.IsDead = 0;
