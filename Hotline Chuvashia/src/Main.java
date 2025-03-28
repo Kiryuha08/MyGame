@@ -15,7 +15,7 @@ public class Main {
         //rooms.AddWalls(100, 100, 150, 250);
 
         rooms.AddEnemy(375, 100);
-        rooms.AddEnemy(175, 200);
+        rooms.AddEnemy(475, 200);
         //rooms.AddEnemy(275, 300);
         //rooms.AddEnemy(675, 250);
         //Enemy enemy = new Enemy(375, 200);
@@ -46,7 +46,7 @@ public class Main {
         while (true) {
             frame.repaint();
             try {
-                TimeUnit.MILLISECONDS.sleep(5);
+                TimeUnit.MILLISECONDS.sleep(15);
             }
             catch (InterruptedException e) {
             }

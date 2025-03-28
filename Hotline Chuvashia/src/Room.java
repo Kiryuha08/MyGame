@@ -11,6 +11,7 @@ public class Room {
     public int[][] RoomPoints;
 
     public Room () {
+
         this.walls = new ArrayList<Walls>();
         this.Enemies = new ArrayList<Enemy>();
         this.RoomPoints = new int[800][600]; // Создаём матрицу из всех точек комнаты
@@ -19,6 +20,7 @@ public class Room {
         // hero - 2
         // vizor - 3
         // enemy - 4
+        // bullet - 5
     }
 
     void AddWalls(int x1, int y1, int x2, int y2){
@@ -30,6 +32,7 @@ public class Room {
     void AddEnemy(int x, int y) throws IOException {
         this.Enemies.add(new Enemy(x,y, this));
     }
+
 
     void RefreshPoints(){
         for (int[] row: this.RoomPoints)

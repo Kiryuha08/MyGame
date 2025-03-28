@@ -24,24 +24,35 @@ public class Vizor {
         this.y = enemy.y + enemy.WH/2;
         this.enStatus = enemy.IsDead;*/
 
-        if(enemy.IsDead != 1) {
+        if (enemy.IsDead != 1) {
+            int HeroInVizor = 0;
             int x, y;
-            for (int a = (int) enemy.Angle - this.Angle / 2; a <= (int) enemy.Angle + this.Angle / 2; a++) {
+            for (int a = enemy.Angle - this.Angle / 2; a <= enemy.Angle + this.Angle / 2; a++) {
                 for (int n = 0; n < this.Lenght; n++) {
                     x = (int) (n * Math.cos(Math.toRadians(a)) + enemy.x);
                     y = (int) (n * Math.sin(Math.toRadians(a)) + enemy.y);
                     if ((x < 0) || (y < 0) || (x >= 800) || (y >= 600)) continue;
                     //System.out.println(enemy.room.RoomPoints[x][y]);
+
                     if (enemy.room.RoomPoints[x][y] == 2) {
-                        //System.out.println("i see you");
-                        this.ISeeYou = 1;
+                        System.out.println("i see you");
+                        HeroInVizor = 1;
                         this.heroX = x;
                         this.heroY = y;
                     }
+
+                    if (HeroInVizor == 1) {
+                        this.ISeeYou = 1;
+                    }
+                    else{
+                        this.ISeeYou = 0;
+                    }
+
+
                     if (enemy.room.RoomPoints[x][y] != 1) {
                         enemy.room.RoomPoints[x][y] = 3;
-                    } else {
-                        //this.ISeeYou = 0;
+                    }
+                    else {
                         break;
                     }
 
@@ -53,7 +64,7 @@ public class Vizor {
 
     void paint(Graphics g, Enemy enemy){
         if (enStatus == 1) {
-            g.setColor(new Color(0xFFDD00));
+            g.setColor(new Color(0x38FFDD00, true));
             for (int x = 0; x<800; x++){
                 for (int y = 0; y<600; y++){
                     if (enemy.room.RoomPoints[x][y] == 3){

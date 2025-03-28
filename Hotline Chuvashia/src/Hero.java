@@ -116,8 +116,8 @@ public class Hero {
     //}
 
 
-    void posUpdate(Room room){
-
+    void posUpdate(Room room) {
+    if (YouDead != 1){
         this.curTime = System.currentTimeMillis();
         if (this.prevTime == 0) {
             this.prevTime = this.curTime;
@@ -126,44 +126,43 @@ public class Hero {
 
 
         double x1, y1;
-        x1 = (int)((int)this.x + Math.signum(this.xd - (int)this.x) * vx * ((this.curTime - this.prevTime)/4));
-        y1 = (int)((int)this.y + Math.signum(this.yd - (int)this.y) * vy * ((this.curTime - this.prevTime)/4));
+        x1 = (int) ((int) this.x + Math.signum(this.xd - (int) this.x) * vx * ((this.curTime - this.prevTime) / 4));
+        y1 = (int) ((int) this.y + Math.signum(this.yd - (int) this.y) * vy * ((this.curTime - this.prevTime) / 4));
 
         if (this.x - this.xd == 0 && this.y - this.yd > 0)
             this.degrees = 0;
         if (this.x - this.xd < 0 && this.y - this.yd > 0)
-            this.degrees = Math.PI/4;
+            this.degrees = Math.PI / 4;
         if (this.x - this.xd < 0 && this.y - this.yd == 0)
-            this.degrees = Math.PI/2;
+            this.degrees = Math.PI / 2;
         if (this.x - this.xd < 0 && this.y - this.yd < 0)
-            this.degrees = 3*Math.PI/4;;
+            this.degrees = 3 * Math.PI / 4;
+        ;
         if (this.x - this.xd == 0 && this.y - this.yd < 0)
             this.degrees = Math.PI;
         if (this.x - this.xd > 0 && this.y - this.yd < 0)
-            this.degrees = 5*Math.PI/4;
+            this.degrees = 5 * Math.PI / 4;
         if (this.x - this.xd > 0 && this.y - this.yd == 0)
-            this.degrees = 3*Math.PI/2;
+            this.degrees = 3 * Math.PI / 2;
         if (this.x - this.xd > 0 && this.y - this.yd > 0)
-            this.degrees = 7*Math.PI/4;
+            this.degrees = 7 * Math.PI / 4;
 
 
-
-        if ((room.pointCheck((int)((int)x1 + Math.signum(this.xd - (int)this.x) * WiHgh / 2), (int)((int)y1 + Math.signum(this.yd - (int)this.y) * WiHgh / 2)) == 1)
-                && (room.pointCheck((int)(x1 - Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
-                && (room.pointCheck((int)(x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int)(y1 - Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)) {
+        if ((room.pointCheck((int) ((int) x1 + Math.signum(this.xd - (int) this.x) * WiHgh / 2), (int) ((int) y1 + Math.signum(this.yd - (int) this.y) * WiHgh / 2)) == 1)
+                && (room.pointCheck((int) (x1 - Math.signum(this.xd - this.x) * WiHgh / 2), (int) (y1 + Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)
+                && (room.pointCheck((int) (x1 + Math.signum(this.xd - this.x) * WiHgh / 2), (int) (y1 - Math.signum(this.yd - this.y) * WiHgh / 2)) == 1)) {
 
             this.x = x1;
             this.y = y1;
-        }
-        else {
-            if ((room.pointCheck((int)(this.x - WiHgh/2), (int)(y1 + Math.signum(this.yd - (int)this.y) * WiHgh / 2)) == 1)
-                    && (room.pointCheck((int)(this.x + WiHgh/2), (int)(y1 + Math.signum(this.yd - (int)this.y) * WiHgh / 2)) == 1)
+        } else {
+            if ((room.pointCheck((int) (this.x - WiHgh / 2), (int) (y1 + Math.signum(this.yd - (int) this.y) * WiHgh / 2)) == 1)
+                    && (room.pointCheck((int) (this.x + WiHgh / 2), (int) (y1 + Math.signum(this.yd - (int) this.y) * WiHgh / 2)) == 1)
             ) {
                 this.y = y1;
 
             }
-            if ((room.pointCheck((int)(x1 + Math.signum(this.xd - (int)this.x) * WiHgh / 2), (int)(this.y - WiHgh/2)) == 1)
-                    && (room.pointCheck((int)(x1 + Math.signum(this.xd - (int)this.x) * WiHgh / 2), (int)(this.y + WiHgh/2)) == 1)
+            if ((room.pointCheck((int) (x1 + Math.signum(this.xd - (int) this.x) * WiHgh / 2), (int) (this.y - WiHgh / 2)) == 1)
+                    && (room.pointCheck((int) (x1 + Math.signum(this.xd - (int) this.x) * WiHgh / 2), (int) (this.y + WiHgh / 2)) == 1)
             ) {
                 this.x = x1;
 
@@ -192,28 +191,28 @@ public class Hero {
         }
 
 
-/*        if (this.x + WiHgh / 2 > this.xd && this.NextToWall != 1) {
-            this.x -= vx * ((this.curTime - this.prevTime)/4);
-            //System.out.println(xd);
-            //System.out.println(x);
-        } else if (this.x + WiHgh / 2 < this.xd && this.NextToWall != 3) {
-            this.x += vx * ((this.curTime - this.prevTime)/4);
-            //System.out.println(xd);
-            //System.out.println(x);
-        }
-        if (this.x + WiHgh / 2 == this.xd || this.NextToWall % 2 == 1) {
-            if (this.y + WiHgh / 2 > this.yd && this.NextToWall != 2) {
-                this.y -= vy * ((this.curTime - this.prevTime)/4);
-                //System.out.println(yd);
-                //System.out.println(y);
-            } else if (this.y + WiHgh / 2 < this.yd && this.NextToWall != 4) {
-                this.y += vy * ((this.curTime - this.prevTime)/4);
-                //System.out.println(yd);
-                //System.out.println(y);
+/*            if (this.x + WiHgh / 2 > this.xd && this.NextToWall != 1) {
+                this.x -= vx * ((this.curTime - this.prevTime)/4);
+                //System.out.println(xd);
+                //System.out.println(x);
+            } else if (this.x + WiHgh / 2 < this.xd && this.NextToWall != 3) {
+                this.x += vx * ((this.curTime - this.prevTime)/4);
+                //System.out.println(xd);
+                //System.out.println(x);
             }
-        }*/
+            if (this.x + WiHgh / 2 == this.xd || this.NextToWall % 2 == 1) {
+                if (this.y + WiHgh / 2 > this.yd && this.NextToWall != 2) {
+                    this.y -= vy * ((this.curTime - this.prevTime)/4);
+                    //System.out.println(yd);
+                    //System.out.println(y);
+                } else if (this.y + WiHgh / 2 < this.yd && this.NextToWall != 4) {
+                    this.y += vy * ((this.curTime - this.prevTime)/4);
+                    //System.out.println(yd);
+                    //System.out.println(y);
+                }
+            }*/
 
-
+        }
     }
 
     void paint(Graphics g) {
