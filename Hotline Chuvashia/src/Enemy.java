@@ -165,7 +165,7 @@ public class Enemy {
             }
 
             else {
-                if (this.enemystate == 3){
+                if (this.enemystate == 3 && vizor.GoToHero != 1){
                     this.enemystate = 4;
                 }
                 else{
@@ -176,11 +176,11 @@ public class Enemy {
 
             //System.out.println(enemystate + "     "  +this.y+ "         " +this.Y1+ "         " + (this.y <= this.Y2));
         }
-        if (vizor.ISeeYou == 1){
+        if (vizor.ISeeYou == 1 || (vizor.ISeeYou == 0 && vizor.GoToHero == 1)){
             this.enemystate = 3;
         }
 
-        System.out.println(this.enemystate);
+        //System.out.println(this.enemystate);
 
 
 
@@ -216,8 +216,7 @@ public class Enemy {
         }
 
 
-
-
+        System.out.println(vizor.GoToHero);
         if (this.enemystate == 3){
             // расчитать траекторию движения dX dY от текущей точки до точки, где последний развидел героя
             double angle;
@@ -234,20 +233,31 @@ public class Enemy {
                 this.Angle = 180 - (int)Math.signum(vizor.heroY - this.y) * 90;
             }
 
-            double dX = (vizor.heroX - /*(this.Angle - 90)/90 * */this.x);
-            double dY = (vizor.heroY - /*(this.Angle - 90)/90 * */this.y);
+            double dX = (vizor.heroX - this.x);
+            double dY = (vizor.heroY - this.y);
             //System.out.println(this.Angle);
             //System.out.println(Math.sqrt(Math.pow(this.x - dX, 2) + Math.pow(this.y - dY, 2)));
             //System.out.print(vizor.heroX);
             //System.out.print("-");
             //System.out.println(vizor.heroY);
-            if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 200){
-                this.x += v * Math.cos(this.Angle);
-                this.y += v * Math.sin(this.Angle);
-                //System.out.println("!");
+            if (vizor.GoToHero != 1) {
+                if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 200) {
+                    this.x += v * Math.cos(this.Angle);
+                    this.y += v * Math.sin(this.Angle);
+                    //System.out.println("!");
+                }
+                else {
+                    this.EnemyShooting = 1;
+                }
             }
-            else {
-                this.EnemyShooting = 1;
+            else{
+                if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 1) {
+                    this.x += v * Math.cos(this.Angle);
+                    this.y += v * Math.sin(this.Angle);
+                }
+                else{
+                    vizor.GoToHero = 0;
+                }
             }
         }
         //System.out.println(this.curTime - this.prevTime);

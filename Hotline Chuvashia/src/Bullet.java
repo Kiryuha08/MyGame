@@ -47,7 +47,7 @@ public class Bullet {
             }
         }
 
-        if (this.Time / 1000 < 1) {
+        if (this.Time / 500 < 1) {
             this.Time += (this.curTime - this.prevTime);
         }
         else {

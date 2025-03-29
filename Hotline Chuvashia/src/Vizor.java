@@ -11,6 +11,7 @@ public class Vizor {
     int ISeeYou = 0;
     int heroX;
     int heroY;
+    int GoToHero = 0;
 
 
 
@@ -35,17 +36,10 @@ public class Vizor {
                     //System.out.println(enemy.room.RoomPoints[x][y]);
 
                     if (enemy.room.RoomPoints[x][y] == 2) {
-                        System.out.println("i see you");
+                        //System.out.println("i see you");
                         HeroInVizor = 1;
                         this.heroX = x;
                         this.heroY = y;
-                    }
-
-                    if (HeroInVizor == 1) {
-                        this.ISeeYou = 1;
-                    }
-                    else{
-                        this.ISeeYou = 0;
                     }
 
 
@@ -57,6 +51,16 @@ public class Vizor {
                     }
 
                 }
+            }
+
+            if (HeroInVizor == 1) {
+                this.ISeeYou = 1;
+            }
+            else{
+                if (this.ISeeYou == 1) {
+                    this.GoToHero = 1;
+                }
+                this.ISeeYou = 0;
             }
         }
     }
