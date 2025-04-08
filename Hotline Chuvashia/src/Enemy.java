@@ -39,6 +39,7 @@ public class Enemy {
     public Vizor vizor;
     public Bullet bullet;
     public Room room;
+    int Time = 0;
 
 
     public Enemy(int x, int y, Room room) throws IOException {
@@ -48,8 +49,8 @@ public class Enemy {
         this.vizor = new Vizor(x,y);
         this.bullet = new Bullet(x,y);
 
-        this.Image = ImageIO.read(new File("Hotline Chuvashia\\data\\EnemyBasic1.png"));
-        this.Image1 = ImageIO.read(new File("Hotline Chuvashia\\data\\EnemyKilled1.png"));
+        this.Image = ImageIO.read(new File("data\\EnemyBasic1.png"));
+        this.Image1 = ImageIO.read(new File("data\\EnemyKilled1.png"));
 
     }
 
@@ -218,15 +219,21 @@ public class Enemy {
 
         System.out.println(vizor.GoToHero);
         if (this.enemystate == 3){
+
             // расчитать траекторию движения dX dY от текущей точки до точки, где последний развидел героя
             double angle;
-            if (vizor.heroX - this.x != 0) {
-                angle = Math.atan((vizor.heroY - this.y) / (vizor.heroX - this.x));
-                if (vizor.heroX - this.x > 0){
-                    this.Angle = (int)Math.toDegrees(angle);
+            if (vizor.heroX - this.x != 0)  {
+                if(this.Time / 100 > 1) {
+                    this.Time = 0;
+                    angle = Math.atan((vizor.heroY - this.y) / (vizor.heroX - this.x));
+                    if (vizor.heroX - this.x > 0) {
+                        this.Angle = (int) Math.toDegrees(angle);
+                    } else {
+                        this.Angle = (int) Math.toDegrees(Math.PI + angle);
+                    }
                 }
-                else {
-                    this.Angle = (int)Math.toDegrees(Math.PI + angle);
+                else{
+                    this.Time += (this.curTime - this.prevTime);
                 }
             }
             else {
@@ -240,20 +247,24 @@ public class Enemy {
             //System.out.print(vizor.heroX);
             //System.out.print("-");
             //System.out.println(vizor.heroY);
+            System.out.println(this.Angle);
             if (vizor.GoToHero != 1) {
                 if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 200) {
-                    this.x += v * Math.cos(this.Angle);
-                    this.y += v * Math.sin(this.Angle);
-                    //System.out.println("!");
+                    this.x += Math.signum(dX) * v * Math.abs(Math.cos(Math.toRadians(this.Angle)));
+                    this.y += Math.signum(dY) * v * Math.abs(Math.sin(Math.toRadians(this.Angle)));
+                    //System.out.println(Math.signum(dX) * v * Math.abs(Math.sin(Math.toRadians(this.Angle))));
+                    System.out.println(Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)));
+
                 }
                 else {
                     this.EnemyShooting = 1;
                 }
             }
+
             else{
-                if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 1) {
-                    this.x += v * Math.cos(this.Angle);
-                    this.y += v * Math.sin(this.Angle);
+                if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 5) {
+                    this.x += Math.signum(dX) * v * Math.abs(Math.cos(Math.toRadians(this.Angle)));
+                    this.y += Math.signum(dY) * v * Math.abs(Math.sin(Math.toRadians(this.Angle)));
                 }
                 else{
                     vizor.GoToHero = 0;
@@ -282,23 +293,23 @@ public class Enemy {
 
 
 
-    //    if ((int)this.x <= this.X2 && this.y <= this.Y2){
-    //        if (this.Angle > this.Angle1) {
-    //            this.Angle += this.Delta2;
-    //        }
-    //        else{
-    //            this.vx = -1 * this.vx;
-    //        }
-    //    }
-    //    if ((int)this.x >= this.X1 && this.y >= this.Y1){
-    //        if (this.Angle < this.Angle2) {
-    //            this.Angle += this.Delta1;
-    //        }
-    //        else{
-    //            vx = -1 * this.vx;
-    //        }
-    //    }
-    //    this.x += vx * ((this.curTime - this.prevTime)/4);
+        //    if ((int)this.x <= this.X2 && this.y <= this.Y2){
+        //        if (this.Angle > this.Angle1) {
+        //            this.Angle += this.Delta2;
+        //        }
+        //        else{
+        //            this.vx = -1 * this.vx;
+        //        }
+        //    }
+        //    if ((int)this.x >= this.X1 && this.y >= this.Y1){
+        //        if (this.Angle < this.Angle2) {
+        //            this.Angle += this.Delta1;
+        //        }
+        //        else{
+        //            vx = -1 * this.vx;
+        //        }
+        //    }
+        //    this.x += vx * ((this.curTime - this.prevTime)/4);
 
 
         //System.out.println(this.enemystate + "        " + this.Angle + "        " + this.vx + "        " + this.x + "        " + vizor.ISeeYou);

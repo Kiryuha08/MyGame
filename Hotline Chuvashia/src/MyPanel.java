@@ -53,7 +53,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
 
         hero.posUpdate(room);
         //hero.HeroAttack(room);
-        hero.paint(g);
+
 
         for (Enemy enemy : room.Enemies){
             if (enemy.IsDead == 0){
@@ -61,6 +61,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
             }
             enemy.paint(g);
         }
+        hero.paint(g);
         //hero.wallInteraction(room.walls.get(0));
         //vizorEn.PosUpdate(enemy);
         //vizorEn.paint(g);
