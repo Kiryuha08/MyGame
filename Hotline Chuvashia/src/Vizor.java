@@ -29,9 +29,11 @@ public class Vizor {
             int HeroInVizor = 0;
             int x, y;
             for (int a = enemy.Angle - this.Angle / 2; a <= enemy.Angle + this.Angle / 2; a++) {
+                double cos_a = Math.cos(Math.toRadians(a));
+                double sin_a = Math.sin(Math.toRadians(a));
                 for (int n = 0; n < this.Lenght; n++) {
-                    x = (int) (n * Math.cos(Math.toRadians(a)) + enemy.x);
-                    y = (int) (n * Math.sin(Math.toRadians(a)) + enemy.y);
+                    x = (int) (n * cos_a + enemy.x);
+                    y = (int) (n * sin_a + enemy.y);
                     if ((x < 0) || (y < 0) || (x >= 800) || (y >= 600)) continue;
                     //System.out.println(enemy.room.RoomPoints[x][y]);
 
@@ -68,9 +70,9 @@ public class Vizor {
 
     void paint(Graphics g, Enemy enemy){
         if (enStatus == 1) {
-            g.setColor(new Color(0x38FFDD00, true));
-            for (int x = 0; x<800; x++){
-                for (int y = 0; y<600; y++){
+            g.setColor(new Color(0xFFEFD200, true));
+            for (int x = 0; x<800; x += 3){
+                for (int y = 0; y<600; y += 3){
                     if (enemy.room.RoomPoints[x][y] == 3){
                         g.drawLine(x,y,x,y);
                     }

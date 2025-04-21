@@ -32,8 +32,8 @@ public class Hero {
 
 
     public Hero(int x, int y) throws IOException {
-        this.BGImage = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroBasic1.png"));
-        this.BGImage1 = ImageIO.read(new File("Hotline Chuvashia\\data\\HeroKill1.png"));
+        this.BGImage = ImageIO.read(new File("data\\HeroBasic1.png"));
+        this.BGImage1 = ImageIO.read(new File("data\\HeroKill1.png"));
         this.image = this.BGImage;
 
         this.x = x;

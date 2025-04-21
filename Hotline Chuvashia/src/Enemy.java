@@ -26,12 +26,14 @@ public class Enemy {
 
     double X1 = 700;
     double Y1 = this.y;
+    int deltaX;
     int Angle1 = 0;
-    int Delta = 5;
+    int Delta = 1;
     double X2 = 100;
     double Y2 = this.y;
     int Angle2 = 180;
     int Angle = this.Angle1;
+    int NextTTWall = 0;
 
     BufferedImage Image;
     BufferedImage Image1;
@@ -70,43 +72,22 @@ public class Enemy {
     }
 
 
-    boolean IsShooting(Hero hero){
-        if (this.IsDead != 1) {
-            if (Math.signum(this.vx) == Math.signum(hero.x - this.x)) {
-                if (((int) this.x + this.ShootDist <= hero.x + hero.WiHgh || (int) this.x + this.WH + this.ShootDist >= hero.x) && ((int) this.y <= hero.y + hero.WiHgh / 2 && (int) this.y + this.WH >= hero.y - hero.WiHgh / 2)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
-
-
-    //void patrol(){
-    //    this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
-    //}
-
-    //void rotating(){
-    //    if (this.Angle < this.Angle2) {
-    //        this.Angle += this.Delta2;
-    //    }
-    //    if (this.Angle > this.Angle1) {
-    //        this.Angle -= this.Delta2;
-    //    }
-    //}
-
     void posUpdate(Hero hero){
-
 
         this.curTime = System.currentTimeMillis();
         if (this.prevTime == 0) {
             this.prevTime = this.curTime;
         }
 
-
-
+        this.NextTTWall = 0;
+        if ((this.enemystate == 1) || (this.Angle == this.Angle2) || (this.Angle == this.Angle1)) {
+            this.deltaX = (1 - this.Angle / 90);
+        }
+        int nextX = (int) (this.x + this.vx * this.deltaX * ((this.curTime - this.prevTime) / 4)) +
+                this.deltaX * this.WH / 2;
+        if (room.RoomPoints[nextX][(int) this.y] == 1) {
+            this.NextTTWall = 1;
+        }
 
         int HeroKilledMe = 0;
         for (int i = (int)this.x - this.WH/2; i <= (int)this.x + this.WH/2; i++) {
@@ -125,30 +106,19 @@ public class Enemy {
                     else{
                         hero.HeroIsAttack = 0;
                     }
+                    /*
+                    if (room.RoomPoints[i][j] == 1){
+                        this.NextTTWall = 1;
+
+                    }
+                    */
+
                     //System.out.println(hero.HeroIsAttack);
                     room.RoomPoints[i][j] = 4;
 
                 }
             }
         }
-        //if (this.moving )
-        //
-//
-        //if (this.moving == 1){
-        //    this.x += vx * ((this.curTime - this.prevTime)/4);
-        //    this.y += vy * ((this.curTime - this.prevTime)/4);
-        //}
-
-        //if (HeShooting == 0 || hero.YouDead == 1){
-        //    if ((this.x == X2 && this.y == this.Y2) || (this.x + this.WH >= X1 && this.y >= this.Y1)){
-        //        this.v *= -1;
-        //    }
-//
-        //    if (this.Angle < this.Angle2){
-        //        this.Angle += this.Delta1;
-        //    }
-        //    if
-        //        this.x += v * ((this.curTime - this.prevTime)/4);
 
         // 1 - patrol;
         // 2 - rotating;
@@ -156,14 +126,19 @@ public class Enemy {
         // 4 - returning;
 
         if (vizor.ISeeYou == 0) {
-            System.out.println(Y1 + "      " + Y2);
+            //System.out.println(Y1 + "      " + Y2 + "      " + y);
             if (this.y < this.Y1 - 1 || this.y > this.Y1 + 1){
                 this.y += this.vy*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
             }
+            System.out.println(NextTTWall);
+            System.out.println(this.Angle);
             if ((((int) this.x <= this.X2) && (this.Angle > this.Angle1))
-                    || (((int) this.x >= this.X1) && (this.Angle < this.Angle2))) {
+                    || (((int) this.x >= this.X1) && (this.Angle < this.Angle2))
+                    || ((this.NextTTWall == 1) && ((this.Angle < this.Angle2) || (this.Angle > this.Angle1)))) {
                 this.enemystate = 2;
+                this.NextTTWall = 0;
             }
+
 
             else {
                 if (this.enemystate == 3 && vizor.GoToHero != 1){
@@ -173,8 +148,6 @@ public class Enemy {
                     this.enemystate = 1;
                 }
             }
-
-
             //System.out.println(enemystate + "     "  +this.y+ "         " +this.Y1+ "         " + (this.y <= this.Y2));
         }
         if (vizor.ISeeYou == 1 || (vizor.ISeeYou == 0 && vizor.GoToHero == 1)){
@@ -250,10 +223,11 @@ public class Enemy {
             System.out.println(this.Angle);
             if (vizor.GoToHero != 1) {
                 if (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)) > 200) {
+                    //if()
                     this.x += Math.signum(dX) * v * Math.abs(Math.cos(Math.toRadians(this.Angle)));
                     this.y += Math.signum(dY) * v * Math.abs(Math.sin(Math.toRadians(this.Angle)));
                     //System.out.println(Math.signum(dX) * v * Math.abs(Math.sin(Math.toRadians(this.Angle))));
-                    System.out.println(Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)));
+                    //System.out.println(Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)));
 
                 }
                 else {
@@ -287,7 +261,9 @@ public class Enemy {
         }
 
         if (enemystate == 1){
-            this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
+            //if (){
+                this.x += this.vx*(1 - this.Angle/90) * ((this.curTime - this.prevTime)/4);
+            //}
         }
 
 
@@ -319,32 +295,6 @@ public class Enemy {
         this.bullet.posUpdate(this, hero);
     }
 
-    //void heroRotate(){
-    //    if (this.x <= this.X2 && this.y <= this.Y2 && this.Angle2 > this.Angle1){
-    //        this.Angle2 += this.Delta2;
-    //        int Angle21 = Angle2 - 45;
-    //        while (Angle21 > Angle1 - 45) {
-    //            Angle21 -= 5;
-    //            this.x = this.x - this.WH*(Math.sqrt(2)-1) + this.WH * Math.sqrt(2) * Math.cos(Angle21);
-    //        }
-    //    }
-
-
-    //}
-
-
-    //boolean isCollided(Hero hero) {
-    //    if (hero.YouDead != 1) {
-    //        if ((((int) this.x <= hero.x + hero.WiHgh) && ((int) this.x + this.WH >= hero.x)) && (((int) this.y <= hero.y + hero.WiHgh / 2) && ((int) this.y + this.WH >= hero.y - hero.WiHgh / 2))) {
-    //            //|| (((int)this.x == hero.x + hero.WiHgh || (int)this.x+this.WH == hero.x) && (int)this.y-this.WH == hero.y)){
-    //            return true;
-    //        } else {
-    //            return false;
-    //        }
-//
-    //    }
-    //    return false;
-    //}
 
 
 
