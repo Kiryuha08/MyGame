@@ -56,6 +56,7 @@ public class Vizor {
             }
 
             if (HeroInVizor == 1) {
+                this.GoToHero = 0;
                 this.ISeeYou = 1;
             }
             else{
