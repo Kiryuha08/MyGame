@@ -6,6 +6,7 @@ public class Room {
     public ArrayList<Walls> walls;
 
     public ArrayList<Enemy> Enemies;
+    public int EnemyCount = 0;
 
     //public ArrayList<Door> Doors;
     public int[][] RoomPoints;
@@ -29,8 +30,8 @@ public class Room {
         this.UpdateBanPoints();
     }
 
-    void AddEnemy(int x, int y) throws IOException {
-        this.Enemies.add(new Enemy(x,y, this));
+    void AddEnemy(int x, int y, int x1, int x2) throws IOException {
+        this.Enemies.add(new Enemy(x,y,x1,x2, this));
     }
 
 

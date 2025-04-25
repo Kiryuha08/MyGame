@@ -44,16 +44,18 @@ public class Enemy {
     int Time = 0;
 
 
-    public Enemy(int x, int y, Room room) throws IOException {
+    public Enemy(int x, int y, int x1, int x2, Room room) throws IOException {
         this.x = x;
         this.y = y;
+        this.X1 = x1;
+        this.X2 = x2;
         this.room = room;
         this.vizor = new Vizor(x,y);
         this.bullet = new Bullet(x,y);
 
         this.Image = ImageIO.read(new File("data\\EnemyBasic1.png"));
         this.Image1 = ImageIO.read(new File("data\\EnemyKilled1.png"));
-
+        room.EnemyCount++;
     }
 
     public static BufferedImage rotateImage(BufferedImage imageToRotate, double degrees) {
@@ -99,6 +101,7 @@ public class Enemy {
                     if (room.RoomPoints[i][j] == 2) {  // 2 means hero's area
                         hero.HeroIsAttack = 1;
                         this.IsDead = 1;  // Set enemy to dead
+                        room.EnemyCount--;
                         System.out.println("Enemy has been killed!");
                         HeroKilledMe = 1;
                         break;  // Exit the loop since enemy is dead
@@ -300,7 +303,7 @@ public class Enemy {
 
     void paint(Graphics g) {
         //System.out.println(IsDead);
-        vizor.paint(g, this);
+        //vizor.paint(g, this);
         bullet.paint(g, this);
         g.setColor(Color.RED);
         if (this.IsDead != 1) {

@@ -71,14 +71,14 @@ public class Vizor {
 
     void paint(Graphics g, Enemy enemy){
         if (enStatus == 1) {
-            g.setColor(new Color(0xFFEFD200, true));
+/*            g.setColor(new Color(0xFFEFD200, true));
             for (int x = 0; x<800; x += 3){
                 for (int y = 0; y<600; y += 3){
                     if (enemy.room.RoomPoints[x][y] == 3){
                         g.drawLine(x,y,x,y);
                     }
                 }
-            }
+            }*/
             //g.drawPolygon(new int[]{(int) x, (int) (x + x1), (int) (x + x2)}, (new int[]{(int) y, (int) (y - y1), (int) (y + y2)}), 3);
             //g.drawLine((int)this.x,(int)this.y,(int)this.x + 400,(int)this.y+ 200);
             //g.drawLine((int)this.x,(int)this.y,(int)this.x + 400,(int)this.y - 200);

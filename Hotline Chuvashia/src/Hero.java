@@ -38,6 +38,8 @@ public class Hero {
 
         this.x = x;
         this.y = y;
+        this.xd = x;
+        this.yd = y;
     }
 
     public static BufferedImage rotateImage(BufferedImage imageToRotate, double degrees) {
@@ -72,48 +74,6 @@ public class Hero {
     }
 
 
-    void wallInteraction(Walls wall){
-        /*if(((int)this.x == wall.x + wall.wWidx) && ((int)this.y -
-                this.WiHgh/2<= wall.y+ wall.wLeny && (int)this.y + this.WiHgh/2 >= wall.y)){
-            this.NextToWall = 1;        //столкновение с левой стенкой
-        }
-
-        else if(((int)this.y - this.WiHgh/2 == wall.y + wall.wLeny) && ((int)this.x +
-                this.WiHgh >= wall.x && (int)this.x <= wall.x + wall.wWidx)){
-            this.NextToWall = 2;        // столкновение со "дном"
-        }
-
-        else if(((int)this.x + this.WiHgh == wall.x) && ((int)this.y -
-                this.WiHgh/2 <= wall.y+ wall.wLeny && (int)this.y + this.WiHgh/2 >= wall.y)){
-            this.NextToWall = 3;        //столкновение с правой стенкой
-        }
-
-        else if(((int)this.y + this.WiHgh/2== wall.y) && ((int)this.x +
-                this.WiHgh >= wall.x && (int)this.x <= wall.x + wall.wWidx)){
-            this.NextToWall = 4;        // столкновение с "верхом"
-        }
-
-        else{
-            this.NextToWall = 0;
-        }*/
-        //System.out.println(this.NextToWall);
-    }
-
-
-
-    //void paint(Graphics g) {
-    //    g.setColor(Color.gray);
-    //    if (YouDead != 1){
-    //        if (HeroIsAttack == 1){
-    //            g.drawImage(rotateImage(this.BGImage1, this.degrees), (int)this.x-150, (int)this.y-WiHgh/2-130, null);
-    //
-    //        }
-    //        else {
-    //            g.drawImage(rotateImage(this.BGImage, this.degrees), (int) this.x - 150, (int) this.y - WiHgh / 2 - 130, null);
-    //        }
-    //        g.fillRect((int)this.x-WiHgh/2, (int)this.y-WiHgh/2, WiHgh, WiHgh);
-    //    }
-    //}
 
 
     void posUpdate(Room room) {

@@ -6,8 +6,16 @@ import java.io.IOException;
 public class BG {
     BufferedImage BGImage;
 
-    public BG() throws IOException {
-        this.BGImage = ImageIO.read(new File("data\\dark-rock-wall-seamless-texture-free-105.jpg"));
+    public BG(int bgindex) throws IOException {
+        if (bgindex == 2) {
+            this.BGImage = ImageIO.read(new File("data\\OfficeFloor.jpg"));
+        }
+        else if (bgindex == 3) {
+            this.BGImage = ImageIO.read(new File("data\\LabaratoryFloor.jpg"));
+        }
+        else{
+            this.BGImage = ImageIO.read(new File("data\\WarehouseFloor.jpg"));
+        }
     }
 
 

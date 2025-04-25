@@ -59,6 +59,18 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
             if (enemy.IsDead == 0){
                 enemy.posUpdate(this.hero);
             }
+            //enemy.paint(g);
+        }
+        // тут рисуем все визоры сразу (расчеты уже проведены)
+        g.setColor(new Color(0xFFDD00));
+        for (int x = 0; x<800; x+=3){
+            for (int y = 0; y<600; y+=3){
+                if (room.RoomPoints[x][y] == 3){
+                    g.drawLine(x,y,x,y);
+                }
+            }
+        }
+        for (Enemy enemy : room.Enemies){
             enemy.paint(g);
         }
         hero.paint(g);
